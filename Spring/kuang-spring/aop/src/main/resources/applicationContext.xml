@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userService" class="com.yanjing.service.UserServiceImpl"></bean>
+    <bean id="beforeLog" class="com.yanjing.log.BeforeLog"></bean>
+    <bean id="afterLog" class="com.yanjing.log.AfterLog"></bean>
+
+    <!--方式一，使用Spring原生API接口 -->
+    <!--配置AOP，需要导入AOP的约束-->
+    <aop:config>
+        <!--切入点: expression:表达式，execution()-->
+        <aop:pointcut id="pointcut" expression="execution(* com.yanjing.service.UserServiceImpl.*(..))"/>
+
+        <!--执行环绕; advice-ref执行方法 . pointcut-ref切入点-->
+        <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut"></aop:advisor>
+        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"></aop:advisor>
+    </aop:config>
+
+    <!--方式二，自定义切面，使用AOP的标签-->
+    <bean id="userService2" class="com.yanjing.service.UserServiceImpl2"></bean>
+    <bean id="diy" class="com.yanjing.aspect.DiyAspect"></bean>
+    <aop:config>
+        <aop:aspect ref="diy">
+            <aop:pointcut id="diyPointcut" expression="execution(* com.yanjing.service.UserServiceImpl2.*(..))"/>
+            <aop:before method="before" pointcut-ref="diyPointcut"></aop:before>
+            <aop:after method="after" pointcut-ref="diyPointcut"></aop:after>
+        </aop:aspect>
+    </aop:config>
+
+    <!--方式三，注解方式-->
+    <bean id="userService3" class="com.yanjing.service.UserServiceImpl3"></bean>
+    <bean id="annotationPointcut" class="com.yanjing.aspect.AnnotationPointCut"></bean>
+    <aop:aspectj-autoproxy />
+</beans>

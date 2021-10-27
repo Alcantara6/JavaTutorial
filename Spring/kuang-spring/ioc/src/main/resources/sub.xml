@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="address" class="com.yanjing.pojo.Address">
+        <property name="address" value="四川"></property>
+    </bean>
+
+    <!--xml autowire自动装配 (自动装配了address)-->
+    <bean id="student" class="com.yanjing.pojo.Student" autowire="byName">
+        <property name="name" value="严靖"></property>
+
+        <property name="books">
+            <array>
+                <value>西游记</value>
+                <value>三国演义</value>
+                <value>水浒传</value>
+                <value>红楼梦</value>
+            </array>
+        </property>
+
+        <property name="hobbies">
+            <list>
+                <value>听歌</value>
+                <value>看电影</value>
+                <value>爬山</value>
+            </list>
+        </property>
+
+        <property name="card">
+            <map>
+                <entry key="中国邮政" value="123456789"></entry>
+                <entry key="中国银行" value="987654321"></entry>
+            </map>
+        </property>
+
+        <property name="games">
+            <set>
+                <value>LOL</value>
+                <value>BOB</value>
+                <value>COC</value>
+            </set>
+        </property>
+
+        <!--Null注入-->
+        <property name="wife">
+            <null></null>
+        </property>
+
+        <property name="info">
+            <props>
+                <prop key="学号">20190604</prop>
+                <prop key="性别">男</prop>
+                <prop key="姓名">小明</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

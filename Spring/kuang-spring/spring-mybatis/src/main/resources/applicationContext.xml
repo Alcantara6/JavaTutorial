@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="spring-persistence.xml" />
+
+    <bean id="studentMapper" class="com.yanjing.mapper.StudentMapperImpl">
+        <property name="sqlSession" ref="sqlSession"></property>
+    </bean>
+
+    <bean id="studentMapper2" class="com.yanjing.mapper.StudentMapperImpl2">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+
+    <bean id="txStudentMapper" class="com.yanjing.mapper.TxStudentMapperImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+</beans>

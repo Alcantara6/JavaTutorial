@@ -1,0 +1,52 @@
+# 可以注入的配置类
+person:
+  # 随机uuid
+  # 松散绑定
+  first-name: yanjing${random.uuid}
+  # 随机int
+  age: ${random.int}
+  email: yanjing@163.com
+  happy: true
+  birth: 2021/01/01
+  # 行内写法
+  maps: { k1: v1, k2: v2 }
+  # 数组
+  lists:
+    - a
+    - b
+    - c
+  lists2: [cat, dog, pig]
+  dog:
+    # :后面默认值
+    first-name: ${person.hello:hello}_旺财
+    age: 5
+
+weight: 36
+
+#SpringBoot的多环境配置，可以选择激活哪一个
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev
+---
+
+server:
+  port: 8082
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/springboot?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+    # mysql8专用
+    driver-class-name: com.mysql.cj.jdbc.Driver
+---
+server:
+  port: 8083
+spring:
+  config:
+    activate:
+      on-profile: test

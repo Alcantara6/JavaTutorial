@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="sub.xml"></import>
+
+    <bean id="hello" class="com.yanjing.pojo.Hello">
+        <!-- collaborators and configuration for this bean go here -->
+        <property name="name" value="Spring"></property>
+    </bean>
+
+    <bean id="mysqlImpl" class="com.yanjing.dao.UserDaoMysqlImpl"></bean>
+    <bean id="oracleImpl" class="com.yanjing.dao.UserDaoOracleImpl"></bean>
+
+    <bean id="userServiceImpl" class="com.yanjing.service.UserServiceImpl">
+        <property name="userDao" ref="oracleImpl"></property>
+    </bean>
+    <!-- more bean definitions go here -->
+
+    <!--
+       id 是bean的标识符,要唯一,如果没有配置id,name就是默认标识符
+       如果配置id,又配置了name,那么name是别名
+       name可以设置多个别名,可以用逗号,分号,空格隔开
+       如果不配置id和name,可以根据applicationContext.getBean(.class)获取对象;
+
+       class是bean的全限定名=包名+类名
+    -->
+    <!--    有参构造1，通过下标-->
+    <bean id="user1" class="com.yanjing.pojo.User" name="u1, u2 u3;u4">
+        <constructor-arg index="0" value="严靖"></constructor-arg>
+    </bean>
+
+    <!--    有参构造2，通过类型，不建议使用-->
+    <bean id="user2" class="com.yanjing.pojo.User">
+        <constructor-arg type="java.lang.String" value="靖gor"></constructor-arg>
+    </bean>
+
+    <!--    有参构造3，通过名字-->
+    <bean id="user3" class="com.yanjing.pojo.User">
+        <constructor-arg name="name" value="靖娃"></constructor-arg>
+    </bean>
+
+    <!--C(构造: Constructor)命名空间 , 属性依然要设置set方法。把有参构造器加上，这里也能知道，c 就是所谓的构造器注入-->
+    <bean id="user4" class="com.yanjing.pojo.User" c:name="严靖C"></bean>
+
+    <!--P(属性: properties)命名空间 , 属性依然要设置set方法-->
+    <bean id="user5" class="com.yanjing.pojo.User" p:name="严靖P"></bean>
+
+    <!--作用域-->
+    <bean id="user6" class="com.yanjing.pojo.User" scope="prototype"></bean>
+
+    <alias name="user3" alias="vipUser"></alias>
+</beans>
