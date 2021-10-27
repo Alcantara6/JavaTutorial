@@ -43,6 +43,10 @@ spring:
     password: root
     # mysql8专用
     driver-class-name: com.mysql.cj.jdbc.Driver
+# 整合mybatis
+mybatis:
+  type-aliases-package: com.yanjing.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
 ---
 server:
   port: 8083
