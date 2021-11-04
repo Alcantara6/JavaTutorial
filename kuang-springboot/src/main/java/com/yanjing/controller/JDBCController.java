@@ -12,6 +12,7 @@ import java.util.Map;
 /**
  * @author yanjing
  * @date 2021/10/26
+ * 使用jdbcTemplate操作数据库
  */
 @RestController
 public class JDBCController {
@@ -20,7 +21,7 @@ public class JDBCController {
     private JdbcTemplate jdbcTemplate;
 
     // 查询数据库的所有信息
-    // 没有实体类，数据库中的东西怎么获取？ Map
+    // 没有实体类，数据库中的东西怎么获取 => Map类型
     @GetMapping("/userList")
     public List<Map<String, Object>> userList() {
 
