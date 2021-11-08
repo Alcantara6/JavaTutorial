@@ -1,4 +1,5 @@
 module.exports = {
+	publicPath: '.',
 	configureWebpack: (config) => {
 		config.devServer = {
 			disableHostCheck: true,
