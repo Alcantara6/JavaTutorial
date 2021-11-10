@@ -98,7 +98,7 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background: url('~@/assets/poster.jpg') no-repeat;
+	background: url('~@/assets/img/poster.jpg') no-repeat;
 	background-position: center;
 	background-size: cover;
 	position: fixed;

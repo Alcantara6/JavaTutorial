@@ -1,4 +1,4 @@
-import { message, Button, Card, Form, Input, Menu, Layout, Tooltip, Pagination, Row } from 'ant-design-vue';
+import { message, Button, Card, Form, Input, Menu, Layout, Tooltip, Pagination, Row, Carousel } from 'ant-design-vue';
 import { App } from 'vue';
 
 export function installAntd(app: App<Element>): void {
@@ -13,4 +13,5 @@ export function installAntd(app: App<Element>): void {
 	app.use(Card);
 	app.use(Pagination);
 	app.use(Row);
+	app.use(Carousel);
 }

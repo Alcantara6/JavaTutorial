@@ -1,23 +1,21 @@
 <template>
-	<a-menu class="categories" v-model:selectedKeys="current" @click="onMenuClick">
+	<a-menu class="menu" v-model:selectedKeys="current" @click="onMenuClick">
 		<a-menu-item v-for="item in menus" :key="item.id">
 			<template #icon>
 				<AppstoreOutlined />
 			</template>
-			{{ item.name }}
+			<a :href="item.href">
+				{{ item.name }}
+			</a>
 		</a-menu-item>
 	</a-menu>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import AppstoreOutlined from '@ant-design/icons-vue/AppstoreOutlined';
 import { SideMenu } from './common.interface';
 
 export default defineComponent({
-	components: {
-		AppstoreOutlined,
-	},
 	props: {
 		menus: {
 			type: Array as PropType<SideMenu[]>,
@@ -35,6 +33,7 @@ export default defineComponent({
 <script setup lang="ts">
 import { ref } from 'vue';
 import { MenuInfo } from './antd.interface';
+import AppstoreOutlined from '@ant-design/icons-vue/AppstoreOutlined';
 
 const current = ref<string[]>(['1']);
 
@@ -43,4 +42,12 @@ const onMenuClick = (e: MenuInfo) => {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+a {
+	text-decoration: none;
+	color: inherit;
+}
+.ant-menu {
+	height: 100%;
+}
+</style>

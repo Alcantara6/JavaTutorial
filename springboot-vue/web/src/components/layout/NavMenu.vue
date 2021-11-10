@@ -13,10 +13,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import AppstoreOutlined from '@ant-design/icons-vue/AppstoreAddOutlined';
 
 export default defineComponent({
-	components: { AppstoreOutlined },
 	data() {
 		return {
 			navs: [
@@ -32,6 +30,8 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import AppstoreOutlined from '@ant-design/icons-vue/AppstoreAddOutlined';
+
 const current = ref<string[]>(['/index']);
 </script>
 

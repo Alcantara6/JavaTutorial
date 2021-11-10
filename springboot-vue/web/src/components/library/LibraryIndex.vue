@@ -48,9 +48,6 @@ export default defineComponent({
 <style lang="less" scoped>
 .sider {
 	margin-top: 20px;
-	.ant-menu {
-		height: 100%;
-	}
 }
 .content {
 	margin: 20px;
