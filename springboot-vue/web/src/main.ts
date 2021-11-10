@@ -4,6 +4,8 @@ import router from './router';
 
 import axios, { Axios } from 'axios';
 import { installAntd } from './plugins/antd';
+import store from './store';
+import { routerBeforeEach } from './router/guard';
 
 declare module '@vue/runtime-core' {
 	interface ComponentCustomProperties {
@@ -17,4 +19,6 @@ const app = createApp(App);
 app.config.globalProperties.$axios = axios;
 installAntd(app);
 
-app.use(router).mount('#app');
+routerBeforeEach(router, store);
+
+app.use(router).use(store).mount('#app');

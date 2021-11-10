@@ -34,7 +34,13 @@ import { Form } from 'ant-design-vue';
 import { reactive } from 'vue';
 import { loginService } from '@/service/loginService';
 import router from '@/router';
+import { useStore } from 'vuex';
+import { User } from '@/store/types/AppState';
+import { useRoute } from 'vue-router';
+import { AxiosResponse } from 'axios';
 
+const store = useStore();
+const route = useRoute();
 const labelCol = { style: { width: '80px' } };
 const wrapperCol = { span: 14 };
 const useForm = Form.useForm;
@@ -61,12 +67,20 @@ const { validate, validateInfos } = useForm(modelRef, rulesRef, {
 	onValidate: (...args) => console.log(...args),
 });
 
+/** 默认跳到index */
+const getRedirectPath = (): string => {
+	const path = route.query.redirect as string;
+	return path === '/' || path === undefined ? '/index' : path;
+};
+
 const login = () =>
 	validate()
 		.then(() => loginService.login(modelRef.username, modelRef.password))
-		.then((successResponse) => {
-			if (successResponse.data.code === 200) {
-				router.replace({ path: '/index' });
+		.then((successResponse: AxiosResponse) => {
+			if (successResponse.data.code === '200') {
+				const user: User = successResponse.data.body;
+				store.commit('login', user);
+				router.replace({ path: getRedirectPath() });
 			}
 		})
 		.catch((failResponse) => {

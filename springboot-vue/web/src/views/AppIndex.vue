@@ -1,23 +1,23 @@
 <template>
-  <div @click="log">Hello World! {{ count }}</div>
+	<div @click="log">Hello World! {{ count }}</div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "AppIndex",
+	name: 'AppIndex',
 });
 </script>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue';
 
 const count = ref(0);
 
 // 函数
 function log() {
-  console.log(count.value++);
+	console.log(count.value++);
 }
 </script>
 
