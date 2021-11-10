@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import NavMenu from './layout/NavMenu.vue';
+import NavMenu from './NavMenu.vue';
 
 export default defineComponent({
 	components: { NavMenu },
