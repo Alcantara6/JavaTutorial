@@ -1,5 +1,5 @@
 <template>
-	<nav-menu></nav-menu>
+	<nav-menu class="nav-menu"></nav-menu>
 	<router-view></router-view>
 </template>
 
@@ -14,4 +14,12 @@ export default defineComponent({
 });
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.nav-menu {
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 99;
+}
+</style>

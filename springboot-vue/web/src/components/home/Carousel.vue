@@ -1,11 +1,11 @@
 <template>
 	<a-card class="card-carousel">
-		<a-carousel class="push" autopaly>
+		<a-carousel autopaly>
 			<div v-for="item in items" :key="item.id">
 				<a :href="item.link" target="_blank">
 					<img :src="item.img" alt="" class="carousel-img" />
 				</a>
-				<h3>{{ item.title }}</h3>
+				<h3 class="carousel-title">{{ item.title }}</h3>
 			</div>
 		</a-carousel>
 	</a-card>
@@ -22,19 +22,18 @@ export default defineComponent({
 				{
 					id: 1,
 					title: 'How2J.cn - Java 全栈学习网站',
-					img: require('@/assets/img/carousel/how2j.png'),
-					link: 'http://how2j.cn?p=50613',
+					img: require('@/assets/img/carousel/1.jpg'),
 				},
 				{
 					id: 2,
 					title: 'Vue.js - 渐进式 JavaScript 框架',
-					img: require('@/assets/img/carousel/vue.png'),
+					img: require('@/assets/img/carousel/2.jpg'),
 					link: 'https://cn.vuejs.org/',
 				},
 				{
 					id: 3,
 					title: 'element-ui - 网站快速成型工具',
-					img: require('@/assets/img/carousel/element.png'),
+					img: require('@/assets/img/carousel/3.jpg'),
 					link: 'http://element-cn.eleme.io/#/zh-CN',
 				},
 			],
@@ -52,9 +51,6 @@ export default defineComponent({
 	width: 680px;
 	height: 320px;
 }
-.push {
-	/*margin-left: -15px;*/
-}
 
 .carousel-img {
 	height: 100%;
@@ -62,19 +58,14 @@ export default defineComponent({
 	text-align: center;
 }
 
-.el-carousel__item:nth-child(2n) {
-	background: black;
-}
-.el-carousel__item:nth-child(2n + 1) {
-	background: black;
+.carousel-title {
+	color: black;
+	bottom: 43px;
+	text-align: center;
 }
 
-.el-carousel__item h3 {
-	color: black;
-	font-size: 15px;
-	/*line-height: 300px;*/
-	bottom: 43px;
-	float: left;
-	position: relative;
+/** 注意deep */
+.ant-carousel :deep(.slick-dots-bottom) {
+	bottom: 50px;
 }
 </style>

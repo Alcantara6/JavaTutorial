@@ -1,7 +1,7 @@
 <template>
 	<a-layout>
 		<a-layout-sider class="sider">
-			<side-menu :menus="menus"></side-menu>
+			<side-menu id="side-menu" :menus="menus"></side-menu>
 		</a-layout-sider>
 		<a-layout-content class="content">
 			<div id="header-div">
@@ -18,9 +18,13 @@
 <script>
 import { defineComponent } from 'vue';
 import Carousel from './Carousel.vue';
+import QuickNav from './QuickNav.vue';
+import UpdateCard from './UpdateCard.vue';
+import Slogan from './Slogan.vue';
+import About from '../common/About.vue';
 
 export default defineComponent({
-	components: { Carousel },
+	components: { Carousel, QuickNav, UpdateCard, Slogan, About },
 	name: 'AppIndex',
 	data() {
 		return {
@@ -61,15 +65,23 @@ import SideMenu from '../common/SideMenu.vue';
 }
 .content {
 	width: 990px;
+	margin: 0 auto;
+}
+#side-menu {
+	position: fixed;
+	width: 200px;
+	left: 0px;
+	top: 46px;
 }
 #header-div {
 	padding-bottom: 20px;
 	padding-left: 5px;
+	margin-bottom: 100px;
 	background-color: white;
 	.quick-nav {
 		float: right;
-		margin-top: -450px;
-		margin-right: 480px;
+		margin-top: -315px;
+		margin-right: 600px;
 	}
 }
 </style>
