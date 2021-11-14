@@ -7,10 +7,17 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+    # 被sql.init.mode替代
+    # initialization-mode: always
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath*:schema-all.sql
+      data-locations: classpath*:data-all.sql
 
   devtools:
     restart:

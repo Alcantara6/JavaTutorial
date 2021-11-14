@@ -4,6 +4,7 @@ import com.yanjing.dto.response.response.Response;
 import com.yanjing.dto.response.response.ResponseUtils;
 import com.yanjing.dto.user.UserDto;
 import com.yanjing.entity.User;
+import com.yanjing.exception.UnAuthorizedException;
 import com.yanjing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
