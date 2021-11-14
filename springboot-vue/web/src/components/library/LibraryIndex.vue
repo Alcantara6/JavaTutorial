@@ -47,9 +47,9 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .sider {
-	margin-top: 20px;
+	margin-top: 46px;
 }
 .content {
-	margin: 20px;
+	margin: 60px 15px 15px;
 }
 </style>

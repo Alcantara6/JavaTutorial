@@ -65,7 +65,7 @@ import SideMenu from '../common/SideMenu.vue';
 }
 .content {
 	width: 990px;
-	margin: 0 auto;
+	margin: 60px 15px 0;
 }
 #side-menu {
 	position: fixed;
@@ -76,7 +76,7 @@ import SideMenu from '../common/SideMenu.vue';
 #header-div {
 	padding-bottom: 20px;
 	padding-left: 5px;
-	margin-bottom: 100px;
+	margin-bottom: 30px;
 	background-color: white;
 	.quick-nav {
 		float: right;

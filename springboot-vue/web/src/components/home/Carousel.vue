@@ -49,7 +49,6 @@ export default defineComponent({
 .card-carousel {
 	margin-left: 20px;
 	width: 680px;
-	height: 320px;
 }
 
 .carousel-img {

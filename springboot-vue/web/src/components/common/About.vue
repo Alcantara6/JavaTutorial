@@ -1,10 +1,10 @@
 <template>
 	<div class="footer">
-		<div style="border-top: 1px #1f1f1f solid">
-			<p class="alt" style="color: #999; line-height: 0">
+		<div class="container">
+			<p class="alt">
 				&copy; 版权所有：Evan-Nightly &nbsp;
 				<span>技术支持：</span>
-				<a href="" target="_blank" style="color: #999">Evan & MMK</a>
+				<a href="" target="_blank">Evan & MMK</a>
 			</p>
 		</div>
 	</div>
@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 * {
 	margin: 0;
 	padding: 0;
@@ -38,6 +38,9 @@ span {
 .footer {
 	background: #2b2e33;
 	text-align: center;
+	.container {
+		border-top: 1px #1f1f1f solid;
+	}
 }
 
 .footer .alt {
@@ -45,6 +48,8 @@ span {
 	padding: 20px 0;
 	width: 1160px;
 	margin: auto;
+	color: #999;
+	line-height: 0;
 }
 
 .footer .alt .foot {
@@ -59,6 +64,7 @@ span {
 
 a {
 	text-decoration: none;
+	color: #999;
 }
 
 .footer .alt .foot a {
