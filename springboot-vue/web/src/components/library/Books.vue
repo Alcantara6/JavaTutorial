@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<a-button type="primary" @click="onAdd">添加</a-button>
 		<a-row class="book-row">
 			<a-tooltip placement="right" v-for="item in books" :key="item.id">
 				<template #title>
@@ -27,12 +28,17 @@
 		<a-row>
 			<a-pagination v-model:current="currentPage" :defaultPageSize="10" :total="20"></a-pagination>
 		</a-row>
+		<edit-book :visible="isBookFormVisible" @onSubmit="onConfirmEdit" @onCancel="onCancelEdit"></edit-book>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import EditBook from './EditBook.vue';
+import { BookForm } from '@/domain/library/library.interface';
+
 export default defineComponent({
+	components: { EditBook },
 	data() {
 		return {
 			books: [
@@ -66,11 +72,27 @@ export default defineComponent({
 <script setup lang="ts">
 import { ref } from 'vue';
 
+const isBookFormVisible = ref(false);
+
+const onConfirmEdit = (book: BookForm) => {
+	console.log(book);
+	isBookFormVisible.value = false;
+};
+
+const onCancelEdit = () => {
+	isBookFormVisible.value = false;
+};
+
+const onAdd = () => {
+	isBookFormVisible.value = true;
+};
+
 const currentPage = ref(1);
 </script>
 
 <style lang="less" scoped>
 .book-row {
+	margin-top: 15px;
 	height: 840px;
 }
 .book-item {
