@@ -1,10 +1,10 @@
 <template>
 	<a-layout>
 		<a-layout-sider class="sider">
-			<side-menu :menus="menus"></side-menu>
+			<side-menu :menus="menus" @change="onCategoryChange"></side-menu>
 		</a-layout-sider>
 		<a-layout-content class="content">
-			<books></books>
+			<books :category="category"></books>
 		</a-layout-content>
 	</a-layout>
 </template>
@@ -13,33 +13,22 @@
 import { defineComponent } from 'vue';
 import Books from './Books.vue';
 import SideMenu from '../common/SideMenu.vue';
+import { CATEGORY_MENUS } from '@/domain/library/constants/book.constant';
 export default defineComponent({
 	components: { SideMenu, Books },
 	data() {
 		return {
-			menus: [
-				{
-					id: '1',
-					name: '全部',
-				},
-				{
-					id: '2',
-					name: '文学',
-				},
-				{
-					id: '3',
-					name: '流行',
-				},
-				{
-					id: '4',
-					name: '文化',
-				},
-			],
+			category: 0,
+			menus: CATEGORY_MENUS,
 		};
 	},
 	watch: {},
 	computed: {},
-	methods: {},
+	methods: {
+		onCategoryChange(category: number) {
+			this.category = category;
+		},
+	},
 });
 </script>
 

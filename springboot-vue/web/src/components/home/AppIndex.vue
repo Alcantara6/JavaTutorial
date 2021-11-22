@@ -30,22 +30,22 @@ export default defineComponent({
 		return {
 			menus: [
 				{
-					id: '1',
+					id: 1,
 					name: '技术采用',
 					href: '#header-div',
 				},
 				{
-					id: '2',
+					id: 2,
 					name: '最近更新',
 					href: '#update-card',
 				},
 				{
-					id: '3',
+					id: 3,
 					name: '下载源码',
 					href: '#slogan',
 				},
 				{
-					id: '4',
+					id: 4,
 					name: '关于我们',
 					href: '#about',
 				},

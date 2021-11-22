@@ -16,6 +16,33 @@ module.exports = {
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+		camelcase: 'off',
+		'@typescript-eslint/camelcase': 'off',
+		'no-use-before-define': 'off',
+		'@typescript-eslint/no-use-before-define': 'off',
+		'no-empty-function': 'off',
+		'@typescript-eslint/no-empty-function': 'off',
+		'@typescript-eslint/explicit-module-boundary-types': 'off',
+		'@typescript-eslint/ban-types': [
+			'error',
+			{
+				types: {
+					Function: false,
+				},
+				extendDefaults: true
+			},
+		],
+		'no-restricted-imports': [
+			'error',
+			{
+				paths: [
+					{
+						name: '@ant-design/icons-vue',
+						message: '请按需引入图标',
+					},
+				],
+			},
+		],
   },
   overrides: [
     {

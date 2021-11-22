@@ -1,4 +1,4 @@
-import { storageService } from '@/service/storageService';
+import { storageService } from '@/shared/storageService';
 import { createStore } from 'vuex';
 import { AppState, User } from './types/AppState';
 

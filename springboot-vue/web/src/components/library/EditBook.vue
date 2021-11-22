@@ -2,33 +2,27 @@
 	<!-- 因为不能定义一个ref(props.value),没有响应式，所以无法使用v-model:visible -->
 	<a-modal title="添加/修改图书" :visible="visible" @cancel="onCancel">
 		<a-form :label-col="labelCol" :wrapperCol="wrapperCol">
-			<a-form-item label="书名" v-bind="validateInfos.title">
+			<a-form-item label="书名" v-bind="formInfos.title">
 				<a-input v-model:value="modelRef.title" placeholder="不加《》"></a-input>
 			</a-form-item>
-			<a-form-item label="作者" v-bind="validateInfos.author">
+			<a-form-item label="作者" v-bind="formInfos.author">
 				<a-input v-model:value="modelRef.author"></a-input>
 			</a-form-item>
-			<a-form-item label="出版日期" v-bind="validateInfos.date">
+			<a-form-item label="出版日期" v-bind="formInfos.date">
 				<a-input v-model:value="modelRef.date"></a-input>
 			</a-form-item>
-			<a-form-item label="出版社" v-bind="validateInfos.press">
+			<a-form-item label="出版社" v-bind="formInfos.press">
 				<a-input v-model:value="modelRef.press"></a-input>
 			</a-form-item>
-			<a-form-item label="封面" v-bind="validateInfos.cover">
+			<a-form-item label="封面" v-bind="formInfos.cover">
 				<a-input v-model:value="modelRef.cover" placeholder="图片 URL"></a-input>
 			</a-form-item>
-			<a-form-item label="简介" v-bind="validateInfos.abs">
+			<a-form-item label="简介" v-bind="formInfos.abs">
 				<a-textarea v-model:value="modelRef.abs"></a-textarea>
 			</a-form-item>
-			<a-form-item label="分类" v-bind="validateInfos.cid">
-				<a-select v-model:value="modelRef.category.id" placeholder="请选择分类">
-					<a-select-option value="1">文学</a-select-option>
-					<a-select-option value="2">流行</a-select-option>
-					<a-select-option value="3">文化</a-select-option>
-					<a-select-option value="4">生活</a-select-option>
-					<a-select-option value="5">经管</a-select-option>
-					<a-select-option value="6">科技</a-select-option>
-				</a-select>
+			<a-form-item label="分类" v-bind="formInfos.cid">
+				<!-- 绑定种类id，注意前后端都是数字类型 -->
+				<a-select v-model:value="modelRef.category.id" :options="categoryOptions" placeholder="请选择分类"></a-select>
 			</a-form-item>
 		</a-form>
 		<template #footer>
@@ -39,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineEmits, defineProps, reactive, ref, toRaw } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
 	props: {
@@ -61,40 +55,21 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { BookForm } from '@/domain/library/library.interface';
-import { useForm } from 'ant-design-vue/lib/form';
+import { defineEmits, defineProps } from 'vue';
+import { BookFormProps } from '@/domain/library/interface/library.interface';
+import { useBookForm } from '@/domain/library/composables/use-book-form';
+import { SelectProps } from 'ant-design-vue';
+import { CATEGORY_OPTIONS } from '@/domain/library/constants/book.constant';
 
 const emit = defineEmits(['onSubmit', 'onCancel']);
+const props = defineProps(['currBook', 'visible']);
 
-const modelRef = reactive<BookForm>({
-	id: '',
-	title: '',
-	author: '',
-	date: '',
-	press: '',
-	cover: '',
-	abs: '',
-	category: {
-		id: '',
-		name: '',
-	},
-});
-const rulesRef = reactive({
-	title: [
-		{
-			required: true,
-			message: '请输入标题',
-		},
-	],
-});
-
-const { validate, validateInfos } = useForm(modelRef, rulesRef, {
-	onValidate: (...args) => console.log(...args),
-});
+const categoryOptions = ref<SelectProps['options']>(CATEGORY_OPTIONS);
+const { modelRef, validateForm, formInfos } = useBookForm(props as BookFormProps);
 
 const onSubmit = () => {
-	validate().then(() => {
-		const book: BookForm = toRaw(modelRef);
+	validateForm.value().then(() => {
+		const book = modelRef.value;
 		emit('onSubmit', book);
 	});
 };

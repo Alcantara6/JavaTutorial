@@ -34,7 +34,7 @@ public class LibraryController {
         return ResponseUtils.success(resultBook);
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/books/{id}")
     public Response<String> delete(@PathVariable int id) {
 
         bookService.deleteById(id);
@@ -42,12 +42,14 @@ public class LibraryController {
     }
 
     @GetMapping("/categories/{cid}/books")
-    public List<Book> listByCategory(@PathVariable("cid") int cid) {
+    public Response<List<Book>> listByCategory(@PathVariable("cid") int cid) {
 
         if (0 != cid) {
-            return bookService.listByCategory(cid);
+            List<Book> categoryBooks = bookService.listByCategory(cid);
+            return ResponseUtils.success(categoryBooks);
         } else {
-            return bookService.list();
+            List<Book> allBooks = bookService.list();
+            return ResponseUtils.success(allBooks);
         }
     }
 }

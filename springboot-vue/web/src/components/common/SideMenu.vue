@@ -24,6 +24,7 @@ export default defineComponent({
 	data() {
 		return {};
 	},
+	emits: ['change'],
 	watch: {},
 	computed: {},
 	methods: {},
@@ -34,11 +35,13 @@ export default defineComponent({
 import { ref } from 'vue';
 import { MenuInfo } from './antd.interface';
 import AppstoreOutlined from '@ant-design/icons-vue/AppstoreOutlined';
+import { defineEmits } from 'vue';
 
-const current = ref<string[]>(['1']);
+const current = ref<number[]>([]);
+const emits = defineEmits(['change']);
 
 const onMenuClick = (e: MenuInfo) => {
-	console.log('click', e);
+	emits('change', e.key);
 };
 </script>
 

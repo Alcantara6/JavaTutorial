@@ -32,12 +32,13 @@ export default defineComponent({
 <script setup lang="ts">
 import { Form } from 'ant-design-vue';
 import { reactive } from 'vue';
-import { loginService } from '@/service/loginService';
+import { loginService } from '@/domain/authentication/service/loginService';
 import router from '@/router';
 import { useStore } from 'vuex';
 import { User } from '@/store/types/AppState';
 import { useRoute } from 'vue-router';
 import { AxiosResponse } from 'axios';
+import { isSuccess, getBody } from '@/shared/utils/http.util';
 
 const store = useStore();
 const route = useRoute();
@@ -76,9 +77,9 @@ const getRedirectPath = (): string => {
 const login = () =>
 	validate()
 		.then(() => loginService.login(modelRef.username, modelRef.password))
-		.then((successResponse: AxiosResponse) => {
-			if (successResponse.data.code === '200') {
-				const user: User = successResponse.data.body;
+		.then((res: AxiosResponse) => {
+			if (isSuccess(res)) {
+				const user: User = getBody(res);
 				store.commit('login', user);
 				router.replace({ path: getRedirectPath() });
 			}
