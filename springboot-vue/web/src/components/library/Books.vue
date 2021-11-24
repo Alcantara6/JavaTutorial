@@ -1,6 +1,13 @@
 <template>
 	<div>
 		<a-button type="primary" @click="onAdd">添加</a-button>
+		<a-input-search
+			class="input-search"
+			v-model:value="keywords"
+			placeholder="通过书名或作者搜索..."
+			enter-button
+			@search="onSearch"
+		/>
 		<a-row class="book-row">
 			<a-tooltip placement="right" v-for="item in books" :key="item.id">
 				<template #title>
@@ -29,7 +36,12 @@
 			</a-tooltip>
 		</a-row>
 		<a-row>
-			<a-pagination v-model:current="currentPage" :defaultPageSize="10" :total="20"></a-pagination>
+			<a-pagination
+				v-model:current="pageNo"
+				:defaultPageSize="PAGE_SIZE"
+				:total="total"
+				@change="onPageNoChange"
+			></a-pagination>
 		</a-row>
 		<edit-book
 			:currBook="currBook"
@@ -61,20 +73,41 @@ import { ref } from 'vue';
 import { defineProps } from 'vue';
 import { useBooks } from '@/domain/library/composables/use-books';
 import bookService from '@/domain/library/service/bookService';
-import { isSuccess } from '@/shared/utils/http.util';
+import { getPaginationBody, getTotal, isSuccess } from '@/shared/utils/http.util';
 import { message, Modal } from 'ant-design-vue';
 
 const props = defineProps(['category']);
-const { books, currBook, loadBooks } = useBooks(props as BookListProps);
+const { books, currBook, pageNo, PAGE_SIZE, total, keywords, loadBooks } = useBooks(props as BookListProps);
 
 const isBookFormVisible = ref(false);
+
+const onSearch = async (keywords: string) => {
+	const res = await bookService.search(keywords, 1, PAGE_SIZE);
+	if (isSuccess(res)) {
+		books.value = getPaginationBody(res);
+		total.value = getTotal(res);
+	}
+};
+
+const onPageNoChange = async (pageNo: number, pageSize: number) => {
+	const res = await loadBooks(props.category, pageNo, pageSize);
+	if (isSuccess(res)) {
+		books.value = getPaginationBody(res);
+		total.value = getTotal(res);
+	}
+};
 
 const onConfirmEdit = async (book: Book) => {
 	isBookFormVisible.value = false;
 	const response = await bookService.saveOrUpdate(book);
 	if (isSuccess(response)) {
 		message.success('添加/更新成功!');
-		books.value = await loadBooks(props.category);
+		keywords.value = null;
+		const res = await loadBooks(props.category, pageNo.value, PAGE_SIZE);
+		if (isSuccess(res)) {
+			books.value = getPaginationBody(res);
+			total.value = getTotal(res);
+		}
 	} else {
 		message.error('操作失败');
 	}
@@ -102,7 +135,12 @@ const deleteBook = (book: Book) => {
 			const response = await bookService.delete(book);
 			if (isSuccess(response)) {
 				message.success('删除成功!');
-				books.value = await loadBooks(props.category);
+				keywords.value = null;
+				const res = await loadBooks(props.category, pageNo.value, PAGE_SIZE);
+				if (isSuccess(res)) {
+					books.value = getPaginationBody(res);
+					total.value = getTotal(res);
+				}
 			} else {
 				message.error('删除失败');
 			}
@@ -113,11 +151,14 @@ const deleteBook = (book: Book) => {
 		class: 'editor-modal',
 	});
 };
-
-const currentPage = ref(1);
 </script>
 
 <style lang="less" scoped>
+.input-search {
+	margin-left: 40px;
+	width: 400px;
+}
+
 .book-row {
 	margin-top: 15px;
 	height: 760px;

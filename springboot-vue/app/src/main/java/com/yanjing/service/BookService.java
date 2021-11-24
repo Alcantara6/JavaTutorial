@@ -5,6 +5,9 @@ import com.yanjing.dao.CategoryDao;
 import com.yanjing.entity.Book;
 import com.yanjing.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +31,12 @@ public class BookService {
         return bookDao.findAll(sort);
     }
 
+    public Page<Book> list(Integer pageNo, Integer pageSize) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+        return bookDao.findAll(pageable);
+    }
+
     public Book addOrUpdate(Book book) {
         return bookDao.save(book);
     }
@@ -36,12 +45,22 @@ public class BookService {
         bookDao.deleteById(id);
     }
 
-    public List<Book> listByCategory(int cid) {
+    public Page<Book> listByCategory(int cid, Integer pageNo, Integer pageSize) {
+
+        Sort sort = Sort.by(Sort.Direction.DESC, "category");
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
         Category category = categoryDao.findById(cid).orElse(null);
         if (category == null) {
 
-            return List.of();
+            return Page.empty(pageable);
         }
-        return bookDao.findAllByCategory(category);
+        return bookDao.findAllByCategory(category, pageable);
+    }
+
+    public Page<Book> search(String keywords, Integer pageNo, Integer pageSize) {
+
+        Sort sort = Sort.by(Sort.Direction.DESC, "title", "author");
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+        return bookDao.findAllByTitleLikeOrAuthorLike("%" + keywords + "%", "%" + keywords + "%", pageable);
     }
 }
