@@ -22,3 +22,7 @@ spring:
   devtools:
     restart:
       enabled: true
+
+file:
+  baseurl: http://localhost:8443/file/
+  folder: /home/yanjing/图片/tmp/

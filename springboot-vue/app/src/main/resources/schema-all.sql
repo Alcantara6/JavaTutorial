@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `user`
 -- book和category关系数据表
 DROP TABLE IF EXISTS `book`;
 DROP TABLE IF EXISTS `category`;
+
 CREATE TABLE `category`
 (
     `id`   int(11)      NOT NULL,
@@ -19,6 +20,7 @@ CREATE TABLE `category`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
 CREATE TABLE `book`
 (
     `id`     int(11)      NOT NULL AUTO_INCREMENT,

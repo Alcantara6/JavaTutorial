@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { SideMenu } from './common.interface';
+import { SideMenu } from '../../shared/interface/common.interface';
 
 export default defineComponent({
 	props: {
@@ -33,11 +33,11 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { MenuInfo } from './antd.interface';
+import { MenuInfo } from '../../shared/interface/antd.interface';
 import AppstoreOutlined from '@ant-design/icons-vue/AppstoreOutlined';
 import { defineEmits } from 'vue';
 
-const current = ref<number[]>([]);
+const current = ref<number[]>([0]);
 const emits = defineEmits(['change']);
 
 const onMenuClick = (e: MenuInfo) => {

@@ -15,7 +15,7 @@ export function useBooks(props: BookListProps) {
 	const books: Ref<Book[]> = ref([]);
 	const currBook: Ref<Book | null> = ref(null);
 	const pageNo = ref(1);
-	const PAGE_SIZE = 10;
+	const PAGE_SIZE = 18;
 	const total = ref(0);
 	const keywords: Ref<string | null> = ref(null);
 
@@ -30,7 +30,6 @@ export function useBooks(props: BookListProps) {
 	watch(
 		() => props.category,
 		async (categoryId: number) => {
-			console.log(categoryId);
 			keywords.value = null;
 			const res = await loadBooks(categoryId, pageNo.value, PAGE_SIZE);
 			if (isSuccess(res)) {

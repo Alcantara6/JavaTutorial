@@ -2,6 +2,7 @@ package com.yanjing.service;
 
 import com.yanjing.dao.BookDao;
 import com.yanjing.dao.CategoryDao;
+import com.yanjing.domain.Uploader;
 import com.yanjing.entity.Book;
 import com.yanjing.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,6 +27,9 @@ public class BookService {
 
     @Autowired
     private CategoryDao categoryDao;
+
+    @Autowired
+    private Uploader uploader;
 
     public List<Book> list() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
@@ -62,5 +67,10 @@ public class BookService {
         Sort sort = Sort.by(Sort.Direction.DESC, "title", "author");
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
         return bookDao.findAllByTitleLikeOrAuthorLike("%" + keywords + "%", "%" + keywords + "%", pageable);
+    }
+
+    public String uploadCover(MultipartFile file) {
+
+        return uploader.uploadImage(file);
     }
 }

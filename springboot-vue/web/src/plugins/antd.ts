@@ -13,6 +13,7 @@ import {
 	Timeline,
 	Modal,
 	Select,
+	Upload,
 } from 'ant-design-vue';
 import { App } from 'vue';
 
@@ -32,4 +33,5 @@ export function installAntd(app: App<Element>): void {
 	app.use(Row);
 	app.use(Carousel);
 	app.use(Timeline);
+	app.use(Upload);
 }

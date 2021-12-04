@@ -9,10 +9,6 @@ public final class ResponseUtils {
         return new Response<T>(ResponseStatus.OK, body);
     }
 
-    public static <T> Response<T> success(String message) {
-        return new Response<T>(ResponseStatus.OK, message);
-    }
-
     public static Response badRequest(String message) {
         return new Response(ResponseStatus.BAD_REQUEST, message);
     }
@@ -23,5 +19,10 @@ public final class ResponseUtils {
 
     public static Response unAuthorized(String message) {
         return new Response(ResponseStatus.UNAUTHORIZED, message);
+    }
+
+    public static Response internalServerError(String message) {
+
+        return new Response(ResponseStatus.INTERNAL_SERVER_ERROR, message);
     }
 }

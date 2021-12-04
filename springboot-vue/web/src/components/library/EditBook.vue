@@ -16,6 +16,7 @@
 			</a-form-item>
 			<a-form-item label="封面" v-bind="formInfos.cover">
 				<a-input v-model:value="modelRef.cover" placeholder="图片 URL"></a-input>
+				<image-upload :uploadUrl="uploadUrl" @uploaded="onUpload"></image-upload>
 			</a-form-item>
 			<a-form-item label="简介" v-bind="formInfos.abs">
 				<a-textarea v-model:value="modelRef.abs"></a-textarea>
@@ -34,8 +35,10 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import ImageUpload from '../common/ImageUpload.vue';
 
 export default defineComponent({
+	components: { ImageUpload },
 	props: {
 		visible: {
 			type: Boolean,
@@ -45,6 +48,7 @@ export default defineComponent({
 		return {
 			labelCol: { span: 4 },
 			wrapperCol: { span: 14 },
+			uploadUrl: '/api/books/cover',
 		};
 	},
 	emits: ['onSubmit', 'onCancel'],
@@ -60,12 +64,22 @@ import { BookFormProps } from '@/domain/library/interface/library.interface';
 import { useBookForm } from '@/domain/library/composables/use-book-form';
 import { SelectProps } from 'ant-design-vue';
 import { CATEGORY_OPTIONS } from '@/domain/library/constants/book.constant';
+import { useForm } from 'ant-design-vue/lib/form';
 
 const emit = defineEmits(['onSubmit', 'onCancel']);
 const props = defineProps(['currBook', 'visible']);
 
 const categoryOptions = ref<SelectProps['options']>(CATEGORY_OPTIONS);
-const { modelRef, validateForm, formInfos } = useBookForm(props as BookFormProps);
+const { modelRef, validateForm, formInfos, rulesRef } = useBookForm(props as BookFormProps);
+
+const onUpload = (url: string) => {
+	modelRef.value = {
+		...modelRef.value,
+		cover: url,
+	};
+	const { validateInfos } = useForm(modelRef, rulesRef);
+	formInfos.value = validateInfos;
+};
 
 const onSubmit = () => {
 	validateForm.value().then(() => {
