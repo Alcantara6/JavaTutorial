@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author yanjing
  * @date 2021/11/8
- * 前端history模式，跳转自定义404页面
+ * 前端history模式(打包文件放在resources)，跳转自定义404页面
  */
 @Component
 public class ErrorConfig implements ErrorPageRegistrar {

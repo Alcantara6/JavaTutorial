@@ -30,8 +30,6 @@ public class Uploader {
 
     public String uploadImage(MultipartFile file) {
 
-        System.out.println(fileBaseUrl);
-        System.out.println(fileFolder);
         String fileName = StringUtil.randomString(8) + "." + FileUtil.extName(file);
         File imageFile = FileUtil.makeFile(fileFolder, fileName);
         try {

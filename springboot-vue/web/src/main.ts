@@ -13,7 +13,7 @@ declare module '@vue/runtime-core' {
 	}
 }
 
-axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/api' : 'http://localhost:8443';
 
 const app = createApp(App);
 app.config.globalProperties.$axios = axios;

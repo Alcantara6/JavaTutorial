@@ -36,6 +36,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import ImageUpload from '../common/ImageUpload.vue';
+import axios from 'axios';
 
 export default defineComponent({
 	components: { ImageUpload },
@@ -48,7 +49,7 @@ export default defineComponent({
 		return {
 			labelCol: { span: 4 },
 			wrapperCol: { span: 14 },
-			uploadUrl: '/api/books/cover',
+			uploadUrl: axios.defaults.baseURL + '/books/cover',
 		};
 	},
 	emits: ['onSubmit', 'onCancel'],

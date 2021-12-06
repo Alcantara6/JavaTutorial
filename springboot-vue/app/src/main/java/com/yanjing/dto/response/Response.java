@@ -1,4 +1,4 @@
-package com.yanjing.dto.response.response;
+package com.yanjing.dto.response;
 
 import lombok.Data;
 
