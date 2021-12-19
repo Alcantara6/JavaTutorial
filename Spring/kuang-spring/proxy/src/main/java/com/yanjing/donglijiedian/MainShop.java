@@ -1,8 +1,8 @@
-package com.yanjing.bjpowernode;
+package com.yanjing.donglijiedian;
 
-import com.yanjing.bjpowernode.factory.UsbKingFactory;
-import com.yanjing.bjpowernode.handler.MySellHandler;
-import com.yanjing.bjpowernode.service.UsbSell;
+import com.yanjing.donglijiedian.factory.UsbKingFactory;
+import com.yanjing.donglijiedian.handler.MySellHandler;
+import com.yanjing.donglijiedian.service.UsbSell;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
@@ -26,6 +26,7 @@ public class MainShop {
                 factory.getClass().getInterfaces(),
                 handler);
 
+        // com.sun.proxy.$Proxy0: 这是jdk动态代理创建的类型
         System.out.println("proxy:" + proxy.getClass().getName());
         // 4. 通过代理执行方法
         float price = proxy.sell(1);

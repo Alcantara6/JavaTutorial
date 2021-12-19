@@ -1,6 +1,6 @@
-package com.yanjing.bjpowernode.factory;
+package com.yanjing.donglijiedian.factory;
 
-import com.yanjing.bjpowernode.service.UsbSell;
+import com.yanjing.donglijiedian.service.UsbSell;
 
 /**
  * @author yanjing

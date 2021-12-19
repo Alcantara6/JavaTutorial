@@ -1,4 +1,4 @@
-package com.yanjing.bjpowernode.service;
+package com.yanjing.donglijiedian.service;
 
 /**
  * @author yanjing
