@@ -23,4 +23,19 @@
     <select id="deleteUser" parameterType="int">
         delete from user where id = #{id}
     </select>
+
+
+<!--    manyToOne配置-->
+<!--    https://mp.weixin.qq.com/s?__biz=Mzg2NTAzMTExNg==&mid=2247483788&idx=1&sn=aabf8cf31d7d45be184cc59cdb75258c&scene=19#wechat_redirect-->
+<!--    <resultMap id="EmployeeMap" type="Employee">-->
+<!--        <id property="id" column="eid"/>-->
+<!--        <result property="lastName" column="last_name"/>-->
+<!--        <result property="email" column="email"/>-->
+<!--        <result property="gender" column="gender"/>-->
+<!--        <result property="birth" column="birth"/>-->
+<!--        <association property="eDepartment"  javaType="Department">-->
+<!--            <id property="id" column="did"/>-->
+<!--            <result property="departmentName" column="dname"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
 </mapper>

@@ -18,10 +18,10 @@ public class StudentMapperImpl implements StudentMapper {
     }
 
     @Override
-    public List<Student> selectStudent() {
+    public List<Student> selectStudents() {
 
         StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
-        return mapper.selectStudent();
+        return mapper.selectStudents();
     }
 
     @Override

@@ -8,6 +8,7 @@
         <package name="com.yanjing.pojo"/>
     </typeAliases>
 
+    <!--这是mybatis原生的数据源配置-->
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>

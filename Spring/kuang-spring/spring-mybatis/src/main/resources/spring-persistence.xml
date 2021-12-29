@@ -39,6 +39,7 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
+    <!--结合AOP实现事务的织入-->
     <!--配置事务通知-->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <!--配置哪些方法使用什么样的事务,配置事务的传播特性-->

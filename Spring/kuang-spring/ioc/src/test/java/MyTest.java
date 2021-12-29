@@ -3,8 +3,11 @@ import com.yanjing.pojo.Student;
 import com.yanjing.pojo.User;
 import com.yanjing.service.UserService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,8 +29,16 @@ public class MyTest {
         UserService userService = (UserService) context.getBean("userServiceImpl");
         System.out.println(userService.getUser());
 
-        User user = (User) context.getBean("vipUser");
-        System.out.println(user.getName());
+        User u1 = context.getBean("u1", User.class);
+        System.out.println(u1.getName());
+
+        // No qualifying bean of type 'com.yanjing.pojo.User' available:
+        // expected single matching bean but found 6: user1,user2,user3,user4,user5,user6
+        // User user = context.getBean(User.class);
+        // System.out.println(user.getName());
+
+        User vipUser = (User) context.getBean("vipUser");
+        System.out.println(vipUser.getName());
 
         Student student = (Student) context.getBean("student");
         student.show();

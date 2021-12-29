@@ -8,14 +8,15 @@
 
     <import resource="sub.xml"></import>
 
+    <!--默认使用无参构造-->
     <bean id="hello" class="com.yanjing.pojo.Hello">
         <!-- collaborators and configuration for this bean go here -->
         <property name="name" value="Spring"></property>
     </bean>
 
+    <!--ref引用-->
     <bean id="mysqlImpl" class="com.yanjing.dao.UserDaoMysqlImpl"></bean>
     <bean id="oracleImpl" class="com.yanjing.dao.UserDaoOracleImpl"></bean>
-
     <bean id="userServiceImpl" class="com.yanjing.service.UserServiceImpl">
         <property name="userDao" ref="oracleImpl"></property>
     </bean>
@@ -47,11 +48,12 @@
     <!--C(构造: Constructor)命名空间 , 属性依然要设置set方法。把有参构造器加上，这里也能知道，c 就是所谓的构造器注入-->
     <bean id="user4" class="com.yanjing.pojo.User" c:name="严靖C"></bean>
 
-    <!--P(属性: properties)命名空间 , 属性依然要设置set方法-->
+    <!--P(属性: properties)命名空间 , 属性依然要设置set方法。需要无参构造才能使用。-->
     <bean id="user5" class="com.yanjing.pojo.User" p:name="严靖P"></bean>
 
     <!--作用域-->
     <bean id="user6" class="com.yanjing.pojo.User" scope="prototype"></bean>
 
+    <!--别名-->
     <alias name="user3" alias="vipUser"></alias>
 </beans>

@@ -11,10 +11,10 @@ import java.util.List;
  */
 public class TxStudentMapperImpl extends SqlSessionDaoSupport implements StudentMapper {
     @Override
-    public List<Student> selectStudent() {
+    public List<Student> selectStudents() {
 
         StudentMapper mapper = getSqlSession().getMapper(StudentMapper.class);
-        return mapper.selectStudent();
+        return mapper.selectStudents();
     }
 
     @Override
@@ -27,7 +27,7 @@ public class TxStudentMapperImpl extends SqlSessionDaoSupport implements Student
         student.setEmail("abc@123.com");
         addStudent(student);
         deleteStudent(5);
-        List<Student> students = selectStudent();
+        List<Student> students = selectStudents();
         for (Student s : students) {
             System.out.println(s);
         }

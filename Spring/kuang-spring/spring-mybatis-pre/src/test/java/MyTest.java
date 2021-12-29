@@ -1,5 +1,6 @@
 import com.yanjing.mapper.StudentMapper;
 import com.yanjing.pojo.Student;
+import com.yanjing.util.MybatisUtil;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -19,12 +20,7 @@ public class MyTest {
     @Test
     public void test() throws IOException {
 
-        // 读取配置，开启事务
-        String resources = "mybatis-config.xml";
-        InputStream in = Resources.getResourceAsStream(resources);
-
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
-        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        SqlSession sqlSession = MybatisUtil.getSession();
 
         StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
         List<Student> students = mapper.selectStudent();

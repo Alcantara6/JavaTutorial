@@ -3,6 +3,7 @@ package com.yanjing.pojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import javax.annotation.Resource;
 

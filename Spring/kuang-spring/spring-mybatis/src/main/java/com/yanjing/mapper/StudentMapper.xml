@@ -13,6 +13,7 @@
     </insert>
 
     <delete id="deleteStudent" parameterType="int">
+        /*故意写错以验证事务*/
         delete hahahahahahah from student where id = #{id};
     </delete>
 </mapper>

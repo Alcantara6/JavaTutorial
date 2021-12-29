@@ -24,6 +24,7 @@ public class AnnotationPointCut {
         System.out.println("---------注解方式方法执行后---------");
     }
 
+    // 用得较少
     @Around("execution(* com.yanjing.service.UserServiceImpl3.*(..))")
     public void around(ProceedingJoinPoint jp) throws Throwable {
         System.out.println("-------环绕前------");

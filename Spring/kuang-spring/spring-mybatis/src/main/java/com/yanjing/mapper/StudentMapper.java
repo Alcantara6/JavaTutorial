@@ -12,7 +12,7 @@ import java.util.List;
 // 接口对应的Mapper映射xml文件：名字相同且在同一个包下
 public interface StudentMapper {
 
-    public List<Student> selectStudent();
+    public List<Student> selectStudents();
 
     public void update();
 

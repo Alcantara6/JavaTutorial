@@ -10,6 +10,7 @@
     <!--xml autowire自动装配 (自动装配了address)-->
     <bean id="student" class="com.yanjing.pojo.Student" autowire="byName">
         <property name="name" value="严靖"></property>
+        <!--<property name="address" ref="address"></property>-->
 
         <property name="books">
             <array>
@@ -48,6 +49,7 @@
             <null></null>
         </property>
 
+        <!--Java.Util.Properties: 配置类-->
         <property name="info">
             <props>
                 <prop key="学号">20190604</prop>

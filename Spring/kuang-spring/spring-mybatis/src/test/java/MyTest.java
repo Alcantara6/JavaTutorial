@@ -17,7 +17,7 @@ public class MyTest {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         StudentMapper mapper = context.getBean("studentMapper", StudentMapper.class);
-        List<Student> students = mapper.selectStudent();
+        List<Student> students = mapper.selectStudents();
         for (Student student : students) {
             System.out.println(student);
         }
@@ -28,7 +28,7 @@ public class MyTest {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         StudentMapper mapper = context.getBean("studentMapper2", StudentMapper.class);
-        List<Student> students = mapper.selectStudent();
+        List<Student> students = mapper.selectStudents();
         for (Student student : students) {
             System.out.println(student);
         }

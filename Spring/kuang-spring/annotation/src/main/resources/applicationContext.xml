@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-annotation-config-->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -10,7 +11,7 @@
 ">
 
 
-    <!--https://blog.csdn.net/fox_bert/article/details/80793030-->
+    <!-- https://blog.csdn.net/fox_bert/article/details/80793030 -->
     <context:component-scan base-package="com.yanjing" />
     <!--用了scan就可以不用annotation-config-->
     <!--<context:annotation-config/>-->

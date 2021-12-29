@@ -21,7 +21,7 @@ public class TestThread1 extends Thread {
 
     public static void main(String[] args) {
 
-        // 闯将一个线程对象
+        // 创建一个线程对象
         TestThread1 testThread1 = new TestThread1();
         // 调用start()方法开启线程
         testThread1.start();

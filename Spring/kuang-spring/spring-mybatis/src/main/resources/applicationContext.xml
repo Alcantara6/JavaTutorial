@@ -9,6 +9,7 @@
         <property name="sqlSession" ref="sqlSession"></property>
     </bean>
 
+    <!--StudentMapperImpl2继承了SqlSessionDaoSupport，要为SqlSessionDaoSupport注入一个sqlSessionFactory-->
     <bean id="studentMapper2" class="com.yanjing.mapper.StudentMapperImpl2">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
     </bean>

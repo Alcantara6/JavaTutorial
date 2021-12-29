@@ -12,9 +12,9 @@ import java.util.List;
 public class StudentMapperImpl2 extends SqlSessionDaoSupport implements StudentMapper {
 
     @Override
-    public List<Student> selectStudent() {
+    public List<Student> selectStudents() {
 
-        return getSqlSession().getMapper(StudentMapper.class).selectStudent();
+        return getSqlSession().getMapper(StudentMapper.class).selectStudents();
     }
 
     @Override

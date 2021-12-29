@@ -12,7 +12,7 @@ public class MyTest {
     public static void main(String[] args) {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        // 动态代理的是接口
+        // 动态代理的是接口，这里返回的是被创建的代理类，只能向上转型为UserService类型
         UserService userService = context.getBean("userService", UserService.class);
         userService.add();
 
