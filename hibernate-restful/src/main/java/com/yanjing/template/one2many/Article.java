@@ -37,6 +37,8 @@ public class Article implements Serializable {
     // 可选属性optional=false,表示author不能为空。删除文章，不影响用户
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
     // 设置在article表中的关联字段(外键)
+    // 指定外键列，代表该实体类为关系维护方。
+    // 在一对多或者一对一的关系下，需要加上@JoinColumn来指定外键列，避免生成一张中间表。
     @JoinColumn(name = "author")
     private Author author;
 }

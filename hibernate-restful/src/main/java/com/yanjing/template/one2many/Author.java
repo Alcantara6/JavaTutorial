@@ -22,7 +22,7 @@ public class Author implements Serializable {
     private String name;
 
     /**
-     * 级联保存、更新、删除、刷新;
+     * 级联保存、更新、删除、刷新，一定要加在one端;
      * 延迟加载。
      * 当删除用户，会级联删除该用户的所有文章
      */

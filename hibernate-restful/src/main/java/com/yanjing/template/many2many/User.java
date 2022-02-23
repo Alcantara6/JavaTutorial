@@ -1,5 +1,7 @@
 package com.yanjing.template.many2many;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -11,6 +13,8 @@ import java.util.Set;
  * @author yanjing
  * @date 2022/2/20
  */
+@Entity
+@Data
 public class User implements Serializable {
 
     private static final long serialVersionUID = -8857422531687281085L;
@@ -40,8 +44,8 @@ public class User implements Serializable {
     @ManyToMany
     @JoinTable(
             name = "user_authority",
-            joinColumns = @JoinColumn(name = "user"),
-            inverseJoinColumns = @JoinColumn(name = "authority")
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName="id")}
     )
     private Set<Authority> authorities = new HashSet<>();
 }
