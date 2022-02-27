@@ -8,6 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
-    // Query method
+    // derived query
     Optional<Student> findByEmail(String email);
+
+    // derived query
+    long countByEmail(String email);
 }

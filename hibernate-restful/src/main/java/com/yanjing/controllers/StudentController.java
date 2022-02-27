@@ -57,4 +57,10 @@ public class StudentController {
         studentService.deleteById(std.getId());
         return "Student with ID: " + id + "is deleted";
     }
+
+    @GetMapping(value = "/students/count")
+    public long countByEmail(@RequestParam String email) {
+
+        return studentService.countByEmail(email);
+    }
 }

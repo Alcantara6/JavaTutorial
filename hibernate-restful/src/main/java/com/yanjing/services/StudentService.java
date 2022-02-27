@@ -3,6 +3,8 @@ package com.yanjing.services;
 import com.yanjing.models.Student;
 import com.yanjing.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,5 +47,17 @@ public class StudentService implements IStudent {
     public void deleteById(int id) {
         // TODO Auto-generated method stub
         studentrepo.deleteById(id);
+    }
+
+    @Override
+    public Page<Student> getPagedStudents() {
+
+        return studentrepo.findAll(PageRequest.of(1, 20));
+    }
+
+    @Override
+    public long countByEmail(String email) {
+
+        return studentrepo.countByEmail(email);
     }
 }
