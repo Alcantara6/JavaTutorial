@@ -19,7 +19,7 @@
 <!--            create: 程序运行时创建数据库表，如果有表，先删除再创建-->
 <!--            update: 程序运行时创建表，如果有表，不会创建表-->
 <!--            none: 不创建表-->
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="format_sql" value="false"/>
         </properties>
     </persistence-unit>
