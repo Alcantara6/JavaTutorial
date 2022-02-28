@@ -12,6 +12,8 @@
 
 
     <!-- https://blog.csdn.net/fox_bert/article/details/80793030 -->
+<!--    在xml文件配置了<context:component-scan>标签后，spring容器可以自动去扫描base-pack所指定的包或其子包下面的java类文件，-->
+<!--    如果扫描到有@Component、@Controller、@Service 、@Repository等注解修饰的Java类，则将这些类注册为spring容器中的bean。-->
     <context:component-scan base-package="com.yanjing" />
     <!--用了scan就可以不用annotation-config-->
     <!--<context:annotation-config/>-->

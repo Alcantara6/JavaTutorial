@@ -15,23 +15,20 @@ import javax.persistence.Persistence;
  */
 public class JpaTest {
 
-    // Jpa的操作步骤
+    // JPA的操作步骤
     @Test
     public void testSave() {
         // 1. 根据持久化单元名称，加载配置文件创建工厂（实体管理类工厂）对象
-        // EntityManagerFactory ：获取EntityManager对象
-        // 方法：createEntityManager
-        //         * 内部维护的很多的内容
-        // 内部维护了数据库信息，
-        // 维护了缓存信息
-        //         维护了所有的实体管理器对象
-        // 在创建EntityManagerFactory的过程中会根据配置创建数据库表
-        //         * EntityManagerFactory的创建过程比较浪费资源
-        // 特点：线程安全的对象
-        //         多个线程访问同一个EntityManagerFactory不会有线程安全问题
-		// 	* 如何解决EntityManagerFactory的创建过程浪费资源（耗时）的问题？
-        // 思路：创建一个公共的EntityManagerFactory的对象
-        //         * 静态代码块的形式创建EntityManagerFactory (这里可能不太好，其实就是一个单例设计，可以用IOC)
+
+        /**
+         * EntityManagerFactory ：获取EntityManager对象，方法：createEntityManager
+         * factory内部维护的很多的内容，包括数据库信息、缓存信息、实体管理器对象，
+         * 在创建EntityManagerFactory的过程中会根据配置（create）创建数据库表
+         * EntityManagerFactory的创建过程比较浪费资源，是线程安全的对象
+         * 如何解决EntityManagerFactory的创建过程浪费资源（耗时）的问题？
+         * 思路：创建一个公共的EntityManagerFactory的对象，静态代码块的形式创建EntityManagerFactory
+         * (这里可能不太好，其实就是一个单例设计，可以用IOC)
+         */
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("myJpa");
         // 2. 通过实体管理类工厂获取实体管理器
         EntityManager entityManager = factory.createEntityManager();
@@ -48,20 +45,6 @@ public class JpaTest {
         // 6. 释放资源
         entityManager.close();
         factory.close();
-    }
-
-    @Test
-    public void testJpaUtil() {
-
-        EntityManager entityManager = JpaUtils.getEntityManager();
-        EntityTransaction tx = entityManager.getTransaction();
-        tx.begin();
-        Customer customer = new Customer();
-        customer.setCustName("Thiago");
-        customer.setCustIndustry("football");
-        entityManager.merge(customer);
-        tx.commit();
-        entityManager.close();
     }
 
     @Test
