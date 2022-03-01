@@ -27,16 +27,16 @@
         <!--JPA的供应商适配器-->
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <!--                配置是否自动创建数据库表-->
+                <!-- 配置是否自动创建数据库表-->
                 <property name="generateDdl" value="false"/>
-                <!--                指定数据库类型-->
+                <!-- 指定数据库类型-->
                 <property name="database" value="MYSQL"/>
-                <!--                数据库方言：支持的特有语法-->
+                <!-- 数据库方言：支持的特有语法-->
                 <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
                 <property name="showSql" value="true"/>
             </bean>
         </property>
-        <!--        jpa的方言： 高级的特性，比如一级缓存二级缓存等-->
+        <!-- jpa的方言： 高级的特性，比如一级缓存二级缓存等-->
         <property name="jpaDialect">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
         </property>
@@ -47,7 +47,7 @@
     <jpa:repositories base-package="cn.itcast.dao"
                       transaction-manager-ref="transactionManager"
                       entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
-    <!-- JPA事务管理器  -->
+    <!-- JPA事务管理器(MyBatis用的DataSourceTransactionManager)  -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
@@ -64,7 +64,6 @@
             <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
-
     <!-- 5.aop-->
     <aop:config>
         <aop:pointcut id="pointcut" expression="execution(* cn.itcast.service.*.*(..))"/>
