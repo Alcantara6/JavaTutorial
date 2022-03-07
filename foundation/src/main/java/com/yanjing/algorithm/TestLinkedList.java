@@ -1,4 +1,4 @@
-package algorithm;
+package com.yanjing.algorithm;
 
 /**
  * @author yanjing

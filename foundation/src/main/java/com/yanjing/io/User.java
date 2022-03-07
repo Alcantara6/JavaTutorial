@@ -1,4 +1,4 @@
-package io;
+package com.yanjing.io;
 
 import java.io.Serializable;
 

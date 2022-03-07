@@ -1,4 +1,4 @@
-package oo;
+package com.yanjing.oo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
