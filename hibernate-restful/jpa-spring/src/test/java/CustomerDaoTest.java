@@ -4,9 +4,12 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -27,5 +30,19 @@ public class CustomerDaoTest {
 
         Optional<Customer> customer = customerDao.findById(1L);
         assertThat(customer.get().getCustId(), Matchers.is(1L));
+    }
+
+    @Test
+    public void testFindByCustNameAndCustIndustry() {
+
+        List<Customer> customers = customerDao.findByCustNameAndCustIndustry("Thiago", "Sports");
+        System.out.println(customers);
+    }
+
+    @Test
+    @Transactional   // 需要手动事务
+    @Rollback(false) // Rollback默认是true
+    public void testUpdateCustomer() {
+        customerDao.updateCustomer(1L, "Thiago6");
     }
 }
