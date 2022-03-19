@@ -25,7 +25,7 @@ public class CustomerDaoTest {
     @Test
     public void create() {
         Customer customer = new Customer();
-        customer.setCustName("Muller");
+        customer.setCustName("Thiago666");
         customer.setCustIndustry("Football");
 
         customerDao.save(customer);
@@ -36,6 +36,12 @@ public class CustomerDaoTest {
 
         Optional<Customer> customer = customerDao.findById(2L);
         System.out.println(customer);
+    }
+
+    @Test
+    public void testOptionalRList() {
+        Optional<List<Customer>> football = customerDao.findByCustIndustry("Football");
+        System.out.println(football.get());
     }
 
     @Test
