@@ -17,6 +17,9 @@ public interface CustomerDao extends JpaRepository<Customer, Long>, JpaSpecifica
     // Response也可以是Customer
     public List<Customer> findByCustNameAndCustIndustry(String name, String industry);
 
+    @Query(value = "select * from cst_customer where cust_name = ?1 and cust_industry = ?2", nativeQuery = true)
+    public List<Customer> nativeFindByCustNameAndCustIndustry(String name, String industry);
+
     @Query(value = "update Customer set custName = ?2 where custId = ?1")
     @Modifying
     public void updateCustomer(long id, String name);
