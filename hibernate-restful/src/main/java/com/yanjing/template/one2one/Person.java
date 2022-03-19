@@ -27,7 +27,7 @@ public class Person {
     @Column(name = "birthday", nullable = true)
     private Timestamp birthday;
 
-    // Person是关系的维护端，当删除 people，会级联删除 address
+    // Person是关系的维护端，当删除 person，会级联删除 address
     @OneToOne(cascade = {CascadeType.ALL})
     // person中的address_id字段参考address表中的id字段
     // 如果用主键，referencedColumnName可以省略。

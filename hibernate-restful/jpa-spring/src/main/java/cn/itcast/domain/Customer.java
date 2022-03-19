@@ -1,15 +1,25 @@
 package cn.itcast.domain;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author yanjing
  * @date 2022/2/27
  */
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "cst_customer")
 public class Customer implements Serializable {
@@ -38,4 +48,21 @@ public class Customer implements Serializable {
 
     @Column(name = "cust_phone")
     private String custPhone;
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private Set<LinkMan> linkmans = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Customer customer = (Customer) o;
+        return custId != null && Objects.equals(custId, customer.custId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

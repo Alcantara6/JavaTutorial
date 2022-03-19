@@ -23,6 +23,8 @@ public class CustomerDaoTest {
     private CustomerDao customerDao;
 
     @Test
+    @Transactional
+    @Rollback(false)
     public void create() {
         Customer customer = new Customer();
         customer.setCustName("Thiago666");
@@ -32,14 +34,16 @@ public class CustomerDaoTest {
     }
 
     @Test
+    @Transactional
+    @Rollback(false)
     public void testFindById() {
 
-        Optional<Customer> customer = customerDao.findById(2L);
-        System.out.println(customer);
+        Optional<Customer> customer = customerDao.findById(1L);
+        System.out.println(customer.get().getLinkmans().size());
     }
 
     @Test
-    public void testOptionalRList() {
+    public void testOptionalList() {
         Optional<List<Customer>> football = customerDao.findByCustIndustry("Football");
         System.out.println(football.get());
     }
