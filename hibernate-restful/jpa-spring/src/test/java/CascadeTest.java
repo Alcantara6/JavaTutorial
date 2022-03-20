@@ -1,5 +1,4 @@
 import cn.itcast.dao.CustomerDao;
-import cn.itcast.dao.LinkmanDao;
 import cn.itcast.domain.Customer;
 import cn.itcast.domain.LinkMan;
 import org.junit.Test;
@@ -14,51 +13,45 @@ import java.util.Optional;
 
 /**
  * @author yanjing
- * @date 2022/3/19
+ * @date 2022/3/20
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
-public class LinkmanDaoTest {
-
-    @Autowired
-    private LinkmanDao linkmanDao;
+public class CascadeTest {
 
     @Autowired
     private CustomerDao customerDao;
 
+    /**
+     * 级联添加
+     */
     @Test
     @Transactional
     @Rollback(false)
-    public void createTest1() {
+    public void createCascadeAdd() {
 
-        /**
-         * 不以视频为准，如果同时新建保存一的一方和多的一方，不用给一的一方add(多的一方)；反正都是在多的一方设置关系。
-         */
         LinkMan linkMan = new LinkMan();
-        linkMan.setLkmName("Edward");
+        linkMan.setLkmName("Mendez");
 
         Customer customer = new Customer();
-        customer.setCustName("Haland");
+        customer.setCustName("Mbappe");
         customer.setCustIndustry("Football");
 
+        customer.getLinkmans().add(linkMan);
+        // 因为customer放弃了维护权，所以保存时linkman->customer的关联没有建立，
+        // 但是link_man表的lkm_cust_id为NOT NULL，会报错，所以这里显式设置
         linkMan.setCustomer(customer);
 
         customerDao.save(customer);
-        linkmanDao.save(linkMan);
     }
 
     @Test
     @Transactional
     @Rollback(false)
-    public void createTest2() {
+    public void createCascadeRemove() {
 
-        // 现成的一方
-        LinkMan linkMan = new LinkMan();
-        linkMan.setLkmName("Falk");
+        Optional<Customer> customer = customerDao.findById(10L);
 
-        Optional<Customer> customer = customerDao.findById(1L);
-        linkMan.setCustomer(customer.get());
-
-        linkmanDao.save(linkMan);
+        customerDao.delete(customer.get());
     }
 }

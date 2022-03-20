@@ -1,9 +1,6 @@
 package cn.itcast.domain;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -22,6 +19,12 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "cst_customer")
+@NamedEntityGraph(
+        name = "customer-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode("linkmans")
+        }
+)
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = -4148807949961120856L;
@@ -49,7 +52,12 @@ public class Customer implements Serializable {
     @Column(name = "cust_phone")
     private String custPhone;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "customer",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
+    // 注意，防止打印的时候循环依赖
     @ToString.Exclude
     private Set<LinkMan> linkmans = new HashSet<>();
 

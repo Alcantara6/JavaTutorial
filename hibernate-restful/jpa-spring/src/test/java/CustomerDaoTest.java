@@ -1,5 +1,6 @@
 import cn.itcast.dao.CustomerDao;
 import cn.itcast.domain.Customer;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Optional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
+@Slf4j
 public class CustomerDaoTest {
 
     @Autowired
@@ -38,14 +40,15 @@ public class CustomerDaoTest {
     @Rollback(false)
     public void testFindById() {
 
-        Optional<Customer> customer = customerDao.findById(1L);
-        System.out.println(customer.get().getLinkmans().size());
+        Customer customer = customerDao.findById(1L).get();
+        log.info("customer is: "+ customer);
+        log.info("linkman is: " + customer.getLinkmans());
     }
 
     @Test
     public void testOptionalList() {
-        Optional<List<Customer>> football = customerDao.findByCustIndustry("Football");
-        System.out.println(football.get());
+        Optional<List<Customer>> footballMan = customerDao.findByCustIndustry("Football");
+        log.info("result is: {}", footballMan.get());
     }
 
     @Test
