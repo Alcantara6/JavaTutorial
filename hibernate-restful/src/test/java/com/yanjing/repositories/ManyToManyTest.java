@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.transaction.Transactional;
 
@@ -14,8 +15,9 @@ import javax.transaction.Transactional;
  * @author yanjing
  * @date 2022/3/22
  */
-// TODO: 集成测试跑不起来
+// 因为子模块Spring也配置了datasource，可能会冲突，所以外边项目无法启动和做集成测试
 @SpringBootTest(classes = HibernateRestfulApplication.class)
+@ActiveProfiles("test")
 @Transactional
 @Rollback
 class ManyToManyTest {
