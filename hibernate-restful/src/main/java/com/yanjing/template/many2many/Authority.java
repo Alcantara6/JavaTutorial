@@ -1,10 +1,12 @@
 package com.yanjing.template.many2many;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -12,7 +14,11 @@ import java.util.Set;
  * @date 2022/2/20
  */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Table(name = "authority")
 public class Authority implements Serializable {
 
     private static final long serialVersionUID = -1133682399252559406L;
@@ -25,5 +31,19 @@ public class Authority implements Serializable {
     private String name; //权限名
 
     @ManyToMany(mappedBy = "authorities")
+    @ToString.Exclude
     private Set<User> users = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Authority authority = (Authority) o;
+        return id != null && Objects.equals(id, authority.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
