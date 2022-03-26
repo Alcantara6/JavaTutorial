@@ -61,4 +61,12 @@ public class LinkmanDaoTest {
 
         linkmanDao.save(linkMan);
     }
+
+    @Test
+    @Transactional
+    public void findById() {
+
+        Optional<LinkMan> linkman = linkmanDao.findById(1L);
+        linkman.ifPresent(man -> System.out.println(man.getCustomer()));
+    }
 }
