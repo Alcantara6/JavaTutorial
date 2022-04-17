@@ -7,8 +7,8 @@ package com.yanjing.service;
 public class UserServiceImpl implements UserService{
 
     @Override
-    public void add() {
-
+    public int add(int a, int b) {
+        return a + b;
     }
 
     @Override

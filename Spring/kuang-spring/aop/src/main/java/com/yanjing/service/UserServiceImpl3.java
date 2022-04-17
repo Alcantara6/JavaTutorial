@@ -5,9 +5,10 @@ package com.yanjing.service;
  * @date 2021/8/21
  */
 public class UserServiceImpl3 implements UserService {
-    @Override
-    public void add() {
 
+    @Override
+    public int add(int a, int b) {
+        return a + b;
     }
 
     @Override

@@ -7,7 +7,7 @@
         <property name="address" value="四川"></property>
     </bean>
 
-    <!--xml autowire自动装配 (自动装配了address)-->
+    <!--xml autowire自动装配已配置的其它bean (自动装配了address)-->
     <bean id="student" class="com.yanjing.pojo.Student" autowire="byName">
         <property name="name" value="严靖"></property>
         <!--<property name="address" ref="address"></property>-->
@@ -49,7 +49,10 @@
             <null></null>
         </property>
 
-        <!--Java.Util.Properties: 配置类-->
+<!--        Java.Util.Properties: 配置类-->
+<!--        Properties类继承HashTable，键值都只能是String.-->
+<!--        可以认为专用于在配置文件进行配置赋值的类型，譬如AbstractEntityManagerFactoryBean的jpaProperties属性，-->
+<!--        还有System.getProperties();-->
         <property name="info">
             <props>
                 <prop key="学号">20190604</prop>

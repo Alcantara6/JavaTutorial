@@ -6,11 +6,11 @@ package com.yanjing.service;
  */
 public interface UserService {
 
-    public void add();
+    int add(int a, int b);
 
-    public void update();
+    void update();
 
-    public void query();
+    void query();
 
-    public void delete();
+    void delete();
 }
