@@ -16,6 +16,7 @@ public class Cat {
 
     // Spring SPEL表达式取出配置文件的值
     @Value("${weight}")
+    // @Value("${4*9}")
     private Integer weight;
 
     public String getName() {

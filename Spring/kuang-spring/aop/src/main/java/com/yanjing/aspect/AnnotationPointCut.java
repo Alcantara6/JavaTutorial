@@ -4,6 +4,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.Ordered;
 
 /**
  * @author yanjing
@@ -11,7 +12,7 @@ import org.aspectj.lang.annotation.*;
  * 在任何通知中，参数都是可选的，需要使用时直接填写即可，不需要使用时，可以完成不用声明出来
  */
 @Aspect
-public class AnnotationPointCut {
+public class AnnotationPointCut implements Ordered {
 
     /**
      * 采用与ApectJ中使用pointcut关键字类似的方式定义切入点表达式
@@ -162,6 +163,16 @@ public class AnnotationPointCut {
     private void methodAnnotationPointCut() {
     }
 
+    /**
+     * 定义这个切面的优先级,如果有多个切面，值越低的切面,优先级越高（前置通知先执行，后置通知后执行）
+     * 同一个切面内，按通知声明先后的顺序决定优先级
+     * @return
+     */
+    @Override
+    public int getOrder() {
+        return 0;
+    }
+
 
     /**
      * and、or、not（或者&&、||、！）
@@ -169,6 +180,8 @@ public class AnnotationPointCut {
 
     /**
      * 通知传递参数
-     * arg，见UserService-afterReturning
+     * arg，见@afterReturning
      */
+
+
 }

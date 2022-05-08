@@ -1,3 +1,6 @@
+debug:
+  true
+
 # 可以注入的配置类
 person:
   # 随机uuid
@@ -23,14 +26,21 @@ person:
 
 weight: 36
 
-#SpringBoot的多环境配置，可以选择激活哪一个
-server:
-  port: 8081
 spring:
   profiles:
     active: dev
----
 
+---
+# SpringBoot的多环境配置，可以选择激活哪一个
+# 这是文档块模式，一般用多文件模式
+server:
+  port: 8081
+spring:
+  config:
+    activate:
+      on-profile: local
+
+---
 server:
   port: 8082
 spring:
@@ -47,6 +57,7 @@ spring:
 mybatis:
   type-aliases-package: com.yanjing.pojo
   mapper-locations: classpath:mybatis/mapper/*.xml
+
 ---
 server:
   port: 8083
