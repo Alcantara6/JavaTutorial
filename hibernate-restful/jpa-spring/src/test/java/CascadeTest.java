@@ -40,6 +40,7 @@ public class CascadeTest {
         customer.getLinkmans().add(linkMan);
         // 因为customer放弃了维护权，所以保存时linkman->customer的关联没有建立，
         // 但是link_man表的lkm_cust_id为NOT NULL，会报错，所以这里显式设置
+        // 如果没有放弃维护权，就不需要setCustomer
         linkMan.setCustomer(customer);
 
         customerDao.save(customer);
