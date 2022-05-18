@@ -14,9 +14,21 @@ public class TestController {
     @Autowired
     private TestService testService;
 
-    @PostMapping("/api/updateData")
-    public void execute() {
+    @PostMapping("/api/declarative")
+    public boolean declarative() {
 
-        testService.tx();
+        return testService.tx();
+    }
+
+    @PostMapping("/api/programmatic")
+    public boolean programmatic() {
+
+        return testService.programmatic();
+    }
+
+    @PostMapping("/api/chained")
+    public boolean chained() {
+
+        return testService.chained();
     }
 }
