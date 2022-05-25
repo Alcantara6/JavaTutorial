@@ -24,7 +24,7 @@ public class LoginController {
 
     @CrossOrigin
     @PostMapping("/login")
-    public Response login(@RequestBody User requestUser) {
+    public Response<UserDto> login(@RequestBody User requestUser) {
 
         String username = requestUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
