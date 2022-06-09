@@ -39,6 +39,7 @@ public class AuthorityTest {
         System.out.println("isAuthenticated:" + subject.isAuthenticated()); // 输出true
         // 判断subject是否具有admin和user两个角色权限,如没有则会报错
         subject.checkRoles("admin", "user");
+        subject.checkPermissions("");
         // subject.checkRole("xxx"); // 报错
     }
 }

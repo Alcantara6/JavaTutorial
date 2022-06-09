@@ -2,12 +2,14 @@
 	<div>
 		<a-card class="box-card">
 			<div class="show-code">Talk is nothing, show you my code.</div>
-			<a href="https://github.com/Antabot/White-Jotter" target="_blank">
-				<img src="@/assets/img/icon/icon6.png" alt="" class="git-link" />
-			</a>
-			<a href="https://blog.csdn.net/Neuf_Soleil" target="_blank">
-				<img src="@/assets/img/icon/csdn.png" alt="" class="csdn-link" />
-			</a>
+			<div class="slogans">
+				<a href="https://github.com/Antabot/White-Jotter" class="slogan-icon" target="_blank">
+					<img src="@/assets/img/icon/icon7.png" alt="" />
+				</a>
+				<a href="https://blog.csdn.net/Neuf_Soleil" class="slogan-icon" target="_blank">
+					<img src="@/assets/img/icon/csdn.png" alt="" />
+				</a>
+			</div>
 		</a-card>
 	</div>
 </template>
@@ -26,7 +28,7 @@ export default defineComponent({});
 	margin-top: 5px;
 }
 .show-code {
-	font-size: 30px;
+	font-size: 18px;
 	color: azure;
 	white-space: nowrap;
 }
@@ -34,13 +36,15 @@ export default defineComponent({});
 	width: 100%;
 }
 
-.git-link {
-	width: 80px;
+.slogans {
+	display: flex;
+	justify-content: center;
 }
-
-.csdn-link {
-	width: 65px;
-	margin-bottom: 7px;
-	margin-left: 20px;
+.slogan-icon {
+	img {
+		width: 40px;
+		margin: 20px 10px 0;
+		display: block;
+	}
 }
 </style>

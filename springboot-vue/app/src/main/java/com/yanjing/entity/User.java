@@ -1,7 +1,9 @@
 package com.yanjing.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,4 +33,6 @@ public class User implements Serializable {
     private String username; // 登录账户,唯一.
 
     private String password; // 密码.
+
+    private String salt;
 }

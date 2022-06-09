@@ -3,6 +3,7 @@ import { Page } from '../interface/pagination';
 
 export interface StandardResponse<T> {
 	code: string;
+	message: string;
 	body: T;
 }
 

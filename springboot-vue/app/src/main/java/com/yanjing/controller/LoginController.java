@@ -2,15 +2,14 @@ package com.yanjing.controller;
 
 import com.yanjing.dto.response.Response;
 import com.yanjing.dto.response.ResponseUtils;
-import com.yanjing.dto.user.UserDto;
-import com.yanjing.entity.User;
+import com.yanjing.dto.user.UserVo;
+import com.yanjing.exception.BizException;
 import com.yanjing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.HtmlUtils;
 
 /**
  * @author yanjing
@@ -23,20 +22,26 @@ public class LoginController {
     private UserService userService;
 
     @CrossOrigin
-    @PostMapping("/login")
-    public Response<UserDto> login(@RequestBody User requestUser) {
+    @PostMapping("/register")
+    public Response<UserVo> register(@RequestBody UserVo userVo) {
 
-        String username = requestUser.getUsername();
-        username = HtmlUtils.htmlEscape(username);
-
-        User user = userService.get(username, requestUser.getPassword());
-
-        if (user == null) {
-
-            return ResponseUtils.notFound("用户不存在");
-        } else {
-
-            return ResponseUtils.success(new UserDto(user.getUsername(), user.getPassword()));
+        try {
+            userService.register(userVo);
+        } catch (BizException e) {
+            return ResponseUtils.internalServerError(e.getMessage());
         }
+        return ResponseUtils.success(userVo);
+    }
+
+    @CrossOrigin
+    @PostMapping("/login")
+    public Response<UserVo> login(@RequestBody UserVo userVo) {
+
+        try {
+            userService.login(userVo);
+        } catch (BizException e) {
+            return ResponseUtils.internalServerError(e.getMessage());
+        }
+        return ResponseUtils.success(userVo);
     }
 }

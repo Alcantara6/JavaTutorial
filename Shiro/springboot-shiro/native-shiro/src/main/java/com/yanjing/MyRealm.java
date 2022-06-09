@@ -27,6 +27,7 @@ public class MyRealm extends AuthorizingRealm {
 
     {
         userMap.put("yanjing", "123456");
+        userMap.put("zhangsan", "123");
         super.setName("myRealm"); // 设置自定义Realm的名称，取什么无所谓..
     }
 
@@ -38,8 +39,9 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 
+        // 1.从主体传过来的认证信息中，获得用户名
         String userName = (String) principalCollection.getPrimaryPrincipal();
-        // 从数据库获取角色和权限数据
+        // 2. 从数据库获取角色和权限数据
         Set<String> roles = getRolesByUserName(userName);
         Set<String> permissions = getPermissionsByUserName(userName);
 
@@ -92,7 +94,7 @@ public class MyRealm extends AuthorizingRealm {
         if (password == null) {
             return null;
         }
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo("yanjing", password, "myRealm");
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userName, password, "myRealm");
         return authenticationInfo;
     }
 
