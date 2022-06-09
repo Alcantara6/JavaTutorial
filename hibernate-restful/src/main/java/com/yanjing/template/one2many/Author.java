@@ -1,5 +1,6 @@
 package com.yanjing.template.one2many;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -33,6 +34,7 @@ public class Author implements Serializable {
      */
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
+    @JsonIgnoreProperties("author")
     // 拥有mappedBy注解的实体类为关系被维护端
     // mappedBy="author"中的author是Article中的author属性
     private List<Article> articleList;

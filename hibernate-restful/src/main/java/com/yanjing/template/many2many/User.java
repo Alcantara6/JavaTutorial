@@ -1,5 +1,6 @@
 package com.yanjing.template.many2many;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -54,6 +55,7 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName="id")}
     )
     @ToString.Exclude
+    @JsonIgnoreProperties("users")
     private Set<Authority> authorities = new HashSet<>();
 
     @Override

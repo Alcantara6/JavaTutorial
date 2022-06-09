@@ -1,6 +1,10 @@
 package com.yanjing.template.many2many;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -32,6 +36,7 @@ public class Authority implements Serializable {
 
     @ManyToMany(mappedBy = "authorities")
     @ToString.Exclude
+    @JsonIgnoreProperties("authorities")
     private Set<User> users = new HashSet<>();
 
     @Override
