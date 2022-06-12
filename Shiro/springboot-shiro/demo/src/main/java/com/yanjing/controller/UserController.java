@@ -10,15 +10,13 @@ import org.springframework.web.bind.annotation.*;
  * @author yanjing
  * @date 2021/11/4
  */
-@RestController
+@RestController("userController")
 public class UserController {
-
 
     @Autowired
     UserService userService;
 
     /**
-     * 按username账户从数据库中取出用户信息
      *
      * @param username 账户
      * @return

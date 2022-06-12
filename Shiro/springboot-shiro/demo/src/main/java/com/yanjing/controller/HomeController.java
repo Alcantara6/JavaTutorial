@@ -1,16 +1,20 @@
 package com.yanjing.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * @author yanjing
  * @date 2021/11/4
  */
+@Slf4j
+@Controller("homeController")
 public class HomeController {
     
     @RequestMapping({"/", "/index"})
@@ -19,27 +23,34 @@ public class HomeController {
         return "/index";
     }
 
+    /**
+     * shiro用户认证时，要求页面传入后台的用户名为username,密码为password，如果不设置为username、password将不进入Realm域进行认证。
+     * 如果用非username、password，这就需要我们配置
+     * @param request
+     * @param map
+     * @return
+     */
     @RequestMapping("/login")
-    public String login(HttpServletRequest request, Map<String, Object> map) throws Exception{
-        System.out.println("HomeController.login()");
+    public String login(HttpServletRequest request, ModelMap map) {
+        log.info("HomeController.login()");
         // 登录失败从request中获取shiro处理的异常信息。
         // shiroLoginFailure:就是shiro异常类的全类名.
         String exception = (String) request.getAttribute("shiroLoginFailure");
-        System.out.println("exception=" + exception);
+        log.info("exception=" + exception);
         String msg = "";
         if (exception != null) {
             if (UnknownAccountException.class.getName().equals(exception)) {
-                System.out.println("UnknownAccountException -- > 账号不存在：");
+                log.info("UnknownAccountException -- > 账号不存在：");
                 msg = "UnknownAccountException -- > 账号不存在：";
             } else if (IncorrectCredentialsException.class.getName().equals(exception)) {
-                System.out.println("IncorrectCredentialsException -- > 密码不正确：");
+                log.info("IncorrectCredentialsException -- > 密码不正确：");
                 msg = "IncorrectCredentialsException -- > 密码不正确：";
             } else if ("kaptchaValidateFailed".equals(exception)) {
-                System.out.println("kaptchaValidateFailed -- > 验证码错误");
+                log.info("kaptchaValidateFailed -- > 验证码错误");
                 msg = "kaptchaValidateFailed -- > 验证码错误";
             } else {
                 msg = "else >> "+exception;
-                System.out.println("else -- >" + exception);
+                log.info("else -- >" + exception);
             }
         }
         map.put("msg", msg);
@@ -49,7 +60,7 @@ public class HomeController {
 
     @RequestMapping("/403")
     public String unauthorizedRole(){
-        System.out.println("------没有权限-------");
+        log.warn("------没有权限-------");
         return "403";
     }
 }

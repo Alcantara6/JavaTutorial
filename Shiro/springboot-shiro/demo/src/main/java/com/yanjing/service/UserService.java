@@ -8,5 +8,5 @@ import com.yanjing.entity.User;
  */
 public interface UserService {
     
-    public User findByUsername(String username);
+    User findByUsername(String username);
 }
