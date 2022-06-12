@@ -1,10 +1,7 @@
-package com.yanjing.realms;
+package com.yanjing.security;
 
-import com.yanjing.entity.Permission;
-import com.yanjing.entity.Role;
 import com.yanjing.entity.User;
 import com.yanjing.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -18,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author yanjing
- * @date 2021/11/4
+ * @date 2022/6/12
  */
-@Slf4j
-public class MyShiroRealm extends AuthorizingRealm {
+public class MyRealm extends AuthorizingRealm {
+
 
     @Autowired
     private UserService userService;
@@ -29,17 +26,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 
-        // 能进入这里说明用户已经通过验证了
-        String username = (String) principalCollection.getPrimaryPrincipal();
-        User user = userService.findByUsername(username);
-        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        for (Role role : user.getRoles()) {
-            simpleAuthorizationInfo.addRole(role.getName());
-            for (Permission permission : role.getPermissions()) {
-                simpleAuthorizationInfo.addStringPermission(permission.getName());
-            }
-        }
-        return simpleAuthorizationInfo;
+        return new SimpleAuthorizationInfo();
     }
 
     @Override
@@ -47,10 +34,8 @@ public class MyShiroRealm extends AuthorizingRealm {
 
         // 获取用户输入的账户
         String username = (String) authenticationToken.getPrincipal();
-        log.info("doGetAuthenticationInfo, username is {}", username);
-        // 通过username从数据库中查找 User 对象
         // 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-        User user = userService.findByUsername(username);
+        User user = userService.getByName(username);
         if (null == user) {
             return null;
         }
