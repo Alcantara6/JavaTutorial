@@ -1,4 +1,4 @@
-package com.yanjing.error;
+package com.yanjing.config;
 
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.ErrorPageRegistrar;

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @author yanjing
  * @date 2021/11/7
@@ -39,10 +41,11 @@ public class LoginController {
 
     @CrossOrigin
     @PostMapping("/login")
-    public Response<UserVo> login(@RequestBody UserVo userVo) {
+    public Response<UserVo> login(@RequestBody UserVo userVo, HttpSession session) {
 
         try {
             userService.login(userVo);
+            session.setAttribute("user", userVo);
             return ResponseUtils.success(userVo);
         } catch (BizException e) {
             return ResponseUtils.internalServerError(e.getMessage());
@@ -51,13 +54,27 @@ public class LoginController {
 
     @CrossOrigin
     @PostMapping("/login/v2")
-    public Response<UserVo> loginByShiro(@RequestBody UserVo userVo) {
+    public Response<UserVo> loginByShiro(@RequestBody UserVo userVo, HttpSession session) {
 
         UsernamePasswordToken token = new UsernamePasswordToken(userVo.getUsername(), userVo.getPassword());
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
+            session.setAttribute("user", userVo);
             return ResponseUtils.success(userVo);
+        } catch (AuthenticationException e) {
+            return ResponseUtils.internalServerError(e.getMessage());
+        }
+    }
+
+    @CrossOrigin
+    @PostMapping("/logout")
+    public Response<Boolean> logout(HttpSession session) {
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.logout();
+            session.invalidate();
+            return ResponseUtils.success(true);
         } catch (AuthenticationException e) {
             return ResponseUtils.internalServerError(e.getMessage());
         }

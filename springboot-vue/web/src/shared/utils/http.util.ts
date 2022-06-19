@@ -16,6 +16,10 @@ export function getBody<T>(res: AxiosResponse<StandardResponse<T>>) {
 	return res.data.body;
 }
 
+export function getMessage<T>(res: AxiosResponse<StandardResponse<T>>) {
+	return res.data.message;
+}
+
 export function getPaginationBody<T>(res: AxiosResponse<StandardResponse<Page<T>>>) {
 	return res.data.body.content;
 }

@@ -18,8 +18,8 @@ import java.util.Properties;
 /**
  * @author yanjing
  * @date 2021/11/4
- * Apache Shiro 的核心通过 Filter 来实现，就好像 SpringMvc 通过 DispachServlet 来主控制一样。
- * 既然是使用 Filter 一般也就能猜到，是通过URL规则来进行过滤和权限校验，所以我们需要定义一系列关于URL的规则和访问权限。
+ * Apache Shiro 的核心通过 Filter 来实现，就好像 SpringMvc 通过 DispatchServlet 来主控制一样。
+ * 既然是使用Filter 一般也就能猜到，是通过URL规则来进行过滤和权限校验，所以我们需要定义一系列关于URL的规则和访问权限。
  */
 @Configuration
 @Slf4j
@@ -30,7 +30,7 @@ public class ShiroConfig {
         log.info("ShiroConfiguration.shirFilter()");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        /**
+        /*
          * 拦截器
          * authc:所有url都必须认证通过才可以访问
          * anon:所有url都可以匿名访问
@@ -49,7 +49,6 @@ public class ShiroConfig {
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index");
 
-        //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
@@ -87,9 +86,6 @@ public class ShiroConfig {
     /**
      * 开启shiro aop注解支持.
      * 使用代理方式;所以需要开启代码支持;
-     *
-     * @param securityManager
-     * @return
      */
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {

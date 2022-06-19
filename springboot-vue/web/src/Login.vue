@@ -39,7 +39,7 @@ import { useStore } from 'vuex';
 import { User } from '@/store/types/AppState';
 import { useRoute } from 'vue-router';
 import { AxiosResponse } from 'axios';
-import { isSuccess, getBody, StandardResponse } from '@/shared/utils/http.util';
+import { isSuccess, getBody, StandardResponse, getMessage } from '@/shared/utils/http.util';
 import { message } from 'ant-design-vue';
 
 const store = useStore();
@@ -85,7 +85,7 @@ const login = () =>
 				store.commit('login', user);
 				router.replace({ path: getRedirectPath() });
 			} else {
-				message.error(res.data.message);
+				message.error(getMessage(res));
 			}
 		})
 		.catch((failResponse) => {

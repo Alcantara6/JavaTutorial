@@ -7,4 +7,8 @@ export const loginService = {
 			password,
 		});
 	},
+
+	logout(): Promise<AxiosResponse> {
+		return axios.post('/logout');
+	},
 };

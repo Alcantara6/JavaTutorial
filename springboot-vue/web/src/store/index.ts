@@ -15,5 +15,11 @@ export default createStore<AppState>({
 			state.user = user;
 			storageService.setUser(JSON.stringify(user));
 		},
+		logout(state: AppState) {
+			state.user = {
+				username: '',
+			};
+			storageService.removeUser();
+		},
 	},
 });
