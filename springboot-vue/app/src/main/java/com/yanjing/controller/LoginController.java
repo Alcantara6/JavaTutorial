@@ -1,8 +1,9 @@
 package com.yanjing.controller;
 
-import com.yanjing.dto.response.Response;
-import com.yanjing.dto.response.ResponseUtils;
-import com.yanjing.dto.user.UserVo;
+import com.yanjing.vo.response.Response;
+import com.yanjing.vo.response.ResponseUtils;
+import com.yanjing.vo.user.UserVo;
+import com.yanjing.entity.User;
 import com.yanjing.exception.BizException;
 import com.yanjing.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -10,10 +11,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -65,6 +63,21 @@ public class LoginController {
         } catch (AuthenticationException e) {
             return ResponseUtils.internalServerError(e.getMessage());
         }
+    }
+
+    @CrossOrigin
+    @GetMapping("/authentication")
+    public Response<UserVo> authentication() {
+        Subject subject = SecurityUtils.getSubject();
+
+        boolean authenticated = subject.isAuthenticated();
+        if (authenticated) {
+            String username = (String) subject.getPrincipal();
+            User user = userService.getByName(username);
+            UserVo userVo = UserVo.fromUserDo(user);
+            return ResponseUtils.success(userVo);
+        }
+        return ResponseUtils.success(null);
     }
 
     @CrossOrigin

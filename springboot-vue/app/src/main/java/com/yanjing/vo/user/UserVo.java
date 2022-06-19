@@ -1,6 +1,6 @@
-package com.yanjing.dto.user;
+package com.yanjing.vo.user;
 
-import lombok.AllArgsConstructor;
+import com.yanjing.entity.User;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,4 +19,9 @@ public class UserVo implements Serializable {
     private String username;
 
     private String password;
+
+    public static UserVo fromUserDo(User user) {
+        UserVo userVo = new UserVo();
+        return userVo.setUsername(user.getUsername());
+    }
 }

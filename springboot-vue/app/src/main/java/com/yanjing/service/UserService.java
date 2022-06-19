@@ -1,7 +1,7 @@
 package com.yanjing.service;
 
 import com.yanjing.dao.UserDao;
-import com.yanjing.dto.user.UserVo;
+import com.yanjing.vo.user.UserVo;
 import com.yanjing.entity.User;
 import com.yanjing.exception.BizException;
 import com.yanjing.util.EncryptUtil;

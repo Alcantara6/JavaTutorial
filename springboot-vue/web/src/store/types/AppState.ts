@@ -3,5 +3,5 @@ export interface User {
 }
 
 export interface AppState {
-	user: User;
+	user: User | null;
 }

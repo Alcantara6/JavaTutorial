@@ -25,7 +25,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/register", "/login", "/login/v2", "/logout");
+                .excludePathPatterns("/register", "/login", "/login/v2", "/authentication", "/logout");
     }
 
     // addResourceHandler、addResourceLocations配置静态资源映射，注意addResourceLocations的路径末尾必须有/
@@ -40,7 +40,9 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 
         registry.addMapping("/**")
                 .allowedMethods("*")
-                .allowCredentials(false)
+                .allowedHeaders("*")
+                .allowCredentials(true)
+                .allowedOrigins("http://localhost:8080")
                 .maxAge(3600);
     }
 }

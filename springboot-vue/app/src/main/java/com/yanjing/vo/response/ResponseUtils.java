@@ -1,4 +1,4 @@
-package com.yanjing.dto.response;
+package com.yanjing.vo.response;
 
 public final class ResponseUtils {
     public static <T> Response<T> success() {

@@ -1,6 +1,9 @@
 package com.yanjing.interceptor;
 
-import com.yanjing.dto.user.UserVo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,19 +18,32 @@ public class LoginInterceptor implements HandlerInterceptor {
     /**
      * 这里拦截和放行的是rest api，和前端路由守卫不同
      */
+    // @Override
+    // public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    //
+    //     UserVo sessionUser = (UserVo) request.getSession().getAttribute("user");
+    //
+    //     if (sessionUser == null) {
+    //
+    //         // 前后端不分离方式，跳转到login页面：
+    //         // request.getRequestDispatcher("/index.html").forward(request, response);
+    //         // 或
+    //         // response.sendRedirect("login");
+    //         return false;
+    //     }
+    //     return true;
+    // }
+
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        UserVo sessionUser = (UserVo) request.getSession().getAttribute("user");
-
-        if (sessionUser == null) {
-
-            // 前后端不分离方式，跳转到login页面：
-            // request.getRequestDispatcher("/index.html").forward(request, response);
-            // 或
-            // response.sendRedirect("login");
-            return false;
+        // 放行 options 请求，否则无法让前端带上自定义的 header 信息，导致 sessionID 改变，shiro 验证失败
+        if (HttpMethod.OPTIONS.toString().equals(request.getMethod())) {
+            response.setStatus(HttpStatus.NO_CONTENT.value());
+            return true;
         }
-        return true;
+        Subject subject = SecurityUtils.getSubject();
+        return subject.isAuthenticated();
     }
 }

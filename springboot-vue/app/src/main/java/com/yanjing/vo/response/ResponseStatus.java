@@ -1,4 +1,4 @@
-package com.yanjing.dto.response;
+package com.yanjing.vo.response;
 
 public enum ResponseStatus {
     OK("200", "OK"),
