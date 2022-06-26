@@ -55,6 +55,7 @@ public class LoginController {
     public Response<UserVo> loginByShiro(@RequestBody UserVo userVo, HttpSession session) {
 
         UsernamePasswordToken token = new UsernamePasswordToken(userVo.getUsername(), userVo.getPassword());
+        token.setRememberMe(true);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
@@ -71,7 +72,10 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
 
         boolean authenticated = subject.isAuthenticated();
-        if (authenticated) {
+        boolean remembered = subject.isRemembered();
+        System.out.println("API authentication | isAuthenticated: " + subject.isAuthenticated());
+        System.out.println("API authentication | isRemembered: " + subject.isRemembered());
+        if (authenticated || remembered) {
             String username = (String) subject.getPrincipal();
             User user = userService.getByName(username);
             UserVo userVo = UserVo.fromUserDo(user);

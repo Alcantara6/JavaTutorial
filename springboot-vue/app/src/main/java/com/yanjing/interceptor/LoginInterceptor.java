@@ -44,6 +44,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         Subject subject = SecurityUtils.getSubject();
-        return subject.isAuthenticated();
+        System.out.println("interceptor | isAuthenticated: " + subject.isAuthenticated());
+        System.out.println("interceptor | isRemembered: " + subject.isRemembered());
+        return subject.isAuthenticated() || subject.isRemembered();
     }
 }
