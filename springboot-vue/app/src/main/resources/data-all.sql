@@ -1,6 +1,7 @@
 -- Records of user
+-- admin/123
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', 123);
+INSERT INTO `user` VALUES ('1', 'admin', '7224f9488f88923842a7ff43c1c7c0eb', 'E0ShqaD0X2JlrxnW+NKx1Q==');
 
 -- ----------------------------
 -- Records of category

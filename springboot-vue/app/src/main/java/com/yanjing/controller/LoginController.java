@@ -90,7 +90,6 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.logout();
-            session.invalidate();
             return ResponseUtils.success(true);
         } catch (AuthenticationException e) {
             return ResponseUtils.internalServerError(e.getMessage());

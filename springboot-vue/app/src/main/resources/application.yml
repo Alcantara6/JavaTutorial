@@ -1,5 +1,9 @@
 server:
   port: 8443
+  servlet:
+    session:
+      cookie:
+        max-age: 1800
 
 spring:
   datasource:

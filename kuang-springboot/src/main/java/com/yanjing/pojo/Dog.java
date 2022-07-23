@@ -13,7 +13,8 @@ public class Dog {
     @Value("${name}")
     private String firstName;
 
-    @Value("${age}")
+    // 默認值18
+    @Value("${age:18}")
     private Integer age;
 
     public Dog() {

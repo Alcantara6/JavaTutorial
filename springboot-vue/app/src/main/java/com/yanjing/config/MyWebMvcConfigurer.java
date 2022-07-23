@@ -38,6 +38,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
 
+        // 由于跨域情况下会先发出一个 options 请求试探，这个请求是不带 cookie 信息的，所以 shiro 无法获取到 sessionId，将导致认证失败。
+        // 在 allowCredentials(true) ，即允许跨域使用 cookie 的情况下，allowedOrigins() 不能使用通配符 *，这也是出于安全上的考虑。
         registry.addMapping("/**")
                 .allowedMethods("*")
                 .allowedHeaders("*")
