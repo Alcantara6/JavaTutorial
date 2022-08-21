@@ -4,8 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>jap-hibernate</module>
+        <module>jpa-hibernate</module>
         <module>jpa-spring</module>
+        <module>my-spring-boot-data-jpa</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -14,9 +15,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.yanjing</groupId>
-    <artifactId>hibernate-restful</artifactId>
+    <artifactId>spring-data-jpa-hibernate</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hibernate-restful</name>
+    <name>spring-data-jpa-hibernate</name>
     <description>CRUD API with Spring Boot, Lombok, JPA, Hibernate and MySQL</description>
 
     <properties>

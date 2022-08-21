@@ -3,15 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>hibernate-restful</artifactId>
+        <artifactId>spring-data-jpa-hibernate</artifactId>
         <groupId>com.yanjing</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jap-hibernate</artifactId>
+    <artifactId>jpa-spring</artifactId>
 
     <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,13 +21,6 @@
     </properties>
 
     <dependencies>
-        <!-- hibernate对jpa的支持包 -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${project.hibernate.version}</version>
-        </dependency>
-
         <!-- c3p0 -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -33,12 +28,12 @@
             <version>${project.hibernate.version}</version>
         </dependency>
 
-        <!-- log日志 -->
+        <!--juni4-->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>

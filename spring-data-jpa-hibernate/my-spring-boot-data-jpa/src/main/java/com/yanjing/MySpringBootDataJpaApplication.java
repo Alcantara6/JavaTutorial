@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HibernateRestfulApplication {
+public class MySpringBootDataJpaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HibernateRestfulApplication.class, args);
+        SpringApplication.run(MySpringBootDataJpaApplication.class, args);
     }
 
 }
