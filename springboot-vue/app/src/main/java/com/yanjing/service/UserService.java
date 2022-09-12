@@ -34,7 +34,7 @@ public class UserService {
         user.setUsername(username);
         user.setPassword(encryptedPassword);
         user.setSalt(salt);
-        add(user);
+        userDao.save(user);
         return true;
     }
 
@@ -62,15 +62,5 @@ public class UserService {
     public User getByName(String username) {
 
         return userDao.findByUsername(username);
-    }
-
-    public User get(String username, String password) {
-
-        return userDao.getByUsernameAndPassword(username, password);
-    }
-
-    public void add(User user) {
-
-        userDao.save(user);
     }
 }

@@ -1,7 +1,9 @@
 package com.yanjing.dao;
 
 import com.yanjing.entity.User;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * @author yanjing
@@ -9,7 +11,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface UserDao extends JpaRepository<User, Integer> {
 
-    public User findByUsername(String username);
+    User findByUsername(String username);
 
-    public User getByUsernameAndPassword(String username, String password);
+    @Query("from User where username = :username")
+    @EntityGraph(value = "user-entity-graph", type = EntityGraph.EntityGraphType.FETCH)
+    User findWithMenusByUsername(String username);
 }

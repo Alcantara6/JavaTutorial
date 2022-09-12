@@ -1,12 +1,15 @@
 package com.yanjing.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.yanjing.entity.admin.AdminRole;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * @author yanjing
@@ -17,17 +20,34 @@ import java.io.Serializable;
  * 并添加 handler 和 hibernateLazyInitializer 这两个无须 json 化的属性，
  * 所以这里需要用 JsonIgnoreProperties 把这两个属性忽略掉。
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "user")
 @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NamedEntityGraph(
+        name = "user-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode(value = "adminRoles", subgraph = "roles-sub-graph")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "roles-sub-graph",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "adminMenus")
+                        }
+                )
+        }
+)
 public class User implements Serializable {
 
     private static final long serialVersionUID = 2583167132570687965L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id; // 主键.
+    @EqualsAndHashCode.Include
+    private Integer id; // 主键.
 
     @Column(unique = true)
     private String username; // 登录账户,唯一.
@@ -35,4 +55,13 @@ public class User implements Serializable {
     private String password; // 密码.
 
     private String salt;
+
+    @ManyToMany
+    @JoinTable(name = "admin_user_role",
+            joinColumns = @JoinColumn(name = "uid", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "rid", referencedColumnName = "id"),
+            foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)
+    )
+    private Set<AdminRole> adminRoles = new LinkedHashSet<>();
 }

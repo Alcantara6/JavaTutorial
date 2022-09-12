@@ -4,6 +4,63 @@
 INSERT INTO `user` VALUES ('1', 'admin', '7224f9488f88923842a7ff43c1c7c0eb', 'E0ShqaD0X2JlrxnW+NKx1Q==');
 
 -- ----------------------------
+-- Records of admin_user_role
+-- ----------------------------
+INSERT INTO `admin_user_role` VALUES ('40', '24', '2');
+INSERT INTO `admin_user_role` VALUES ('63', '3', '2');
+INSERT INTO `admin_user_role` VALUES ('64', '1', '1');
+INSERT INTO `admin_user_role` VALUES ('65', '2', '3');
+INSERT INTO `admin_user_role` VALUES ('66', '2', '9');
+
+-- ----------------------------
+-- Records of admin_role
+-- ----------------------------
+INSERT INTO `admin_role` VALUES ('1', 'sysAdmin', '系统管理员', '1');
+INSERT INTO `admin_role` VALUES ('2', 'contentManager', '内容管理员', '1');
+INSERT INTO `admin_role` VALUES ('3', 'visitor', '访客', '1');
+INSERT INTO `admin_role` VALUES ('9', 'test', '测试角色', '1');
+
+-- ----------------------------
+-- Records of admin_role_menu
+-- ----------------------------
+INSERT INTO `admin_role_menu` VALUES ('19', '4', '1');
+INSERT INTO `admin_role_menu` VALUES ('20', '4', '2');
+INSERT INTO `admin_role_menu` VALUES ('21', '3', '1');
+INSERT INTO `admin_role_menu` VALUES ('22', '3', '2');
+INSERT INTO `admin_role_menu` VALUES ('23', '9', '1');
+INSERT INTO `admin_role_menu` VALUES ('24', '9', '2');
+INSERT INTO `admin_role_menu` VALUES ('77', '2', '1');
+INSERT INTO `admin_role_menu` VALUES ('78', '2', '2');
+INSERT INTO `admin_role_menu` VALUES ('79', '2', '4');
+INSERT INTO `admin_role_menu` VALUES ('80', '2', '8');
+INSERT INTO `admin_role_menu` VALUES ('81', '2', '9');
+INSERT INTO `admin_role_menu` VALUES ('82', '2', '10');
+INSERT INTO `admin_role_menu` VALUES ('121', '1', '1');
+INSERT INTO `admin_role_menu` VALUES ('122', '1', '2');
+INSERT INTO `admin_role_menu` VALUES ('123', '1', '3');
+INSERT INTO `admin_role_menu` VALUES ('124', '1', '6');
+INSERT INTO `admin_role_menu` VALUES ('125', '1', '7');
+INSERT INTO `admin_role_menu` VALUES ('126', '1', '4');
+INSERT INTO `admin_role_menu` VALUES ('127', '1', '8');
+INSERT INTO `admin_role_menu` VALUES ('128', '1', '9');
+INSERT INTO `admin_role_menu` VALUES ('129', '1', '10');
+INSERT INTO `admin_role_menu` VALUES ('130', '1', '5');
+
+-- ----------------------------
+-- Records of admin_menu
+-- ----------------------------
+INSERT INTO `admin_menu` VALUES ('1', '/admin', 'AdminIndex', '首页', 'el-icon-s-home', 'AdminIndex', '0');
+INSERT INTO `admin_menu` VALUES ('2', '/admin/dashboard', 'DashboardAdmin', '运行情况', null, 'dashboard/admin/index', '1');
+INSERT INTO `admin_menu` VALUES ('3', '/admin', 'User', '用户管理', 'el-icon-user', 'AdminIndex', '0');
+INSERT INTO `admin_menu` VALUES ('4', '/admin', 'Content', '内容管理', 'el-icon-tickets', 'AdminIndex', '0');
+INSERT INTO `admin_menu` VALUES ('5', '/admin', 'System', '系统配置', 'el-icon-s-tools', 'AdminIndex', '0');
+INSERT INTO `admin_menu` VALUES ('6', '/admin/user/profile', 'Profile', '用户信息', null, 'user/UserProfile', '3');
+INSERT INTO `admin_menu` VALUES ('7', '/admin/user/role', 'Role', '角色配置', null, 'user/Role', '3');
+INSERT INTO `admin_menu` VALUES ('8', '/admin/content/book', 'BookManagement', '图书管理', null, 'content/BookManagement', '4');
+INSERT INTO `admin_menu` VALUES ('9', '/admin/content/banner', 'BannerManagement', '广告管理', null, 'content/BannerManagement', '4');
+INSERT INTO `admin_menu` VALUES ('10', '/admin/content/article', 'ArticleManagement', '文章管理', null, 'content/ArticleManagement', '4');
+
+-- ----------------------------
 -- Records of category
 -- ----------------------------
 INSERT INTO `category` VALUES ('1', '文学');

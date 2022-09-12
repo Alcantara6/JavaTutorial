@@ -23,8 +23,8 @@ public interface CustomerDao extends JpaRepository<Customer, Long>, JpaSpecifica
 
     @Query(value = "update Customer set custName = ?2 where custId = ?1")
     @Modifying
-    public void updateCustomer(long id, String name);
+    void updateCustomer(long id, String name);
 
     @EntityGraph(value = "customer-entity-graph", type = EntityGraph.EntityGraphType.LOAD)
-    public Customer findByCustName(String name);
+    Customer findByCustName(String name);
 }
