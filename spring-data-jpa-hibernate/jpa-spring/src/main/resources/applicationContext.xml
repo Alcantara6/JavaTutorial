@@ -33,7 +33,7 @@
                 <property name="database" value="MYSQL"/>
                 <!-- 数据库方言：支持的特有语法-->
                 <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
-                <property name="showSql" value="true"/>
+                <property name="showSql" value="false"/>
             </bean>
         </property>
         <!-- jpa的方言： 高级的特性，比如一级缓存二级缓存等-->
@@ -43,8 +43,9 @@
 
 <!--        注入jpa的配置信息，加载jpa的基本配置信息和jps实现方式的配置信息-->
         <property name="jpaProperties">
+            <!--logback里配置了logging.level，这里要设置为false，不然会输出双份的sql-->
             <props>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.format_sql">true</prop>
             </props>
         </property>
@@ -54,7 +55,7 @@
     <!-- 整合spring data jpa-->
     <jpa:repositories base-package="cn.itcast.dao"
                       transaction-manager-ref="transactionManager"
-                      entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
+                      entity-manager-factory-ref="entityManagerFactory"/>
     <!-- JPA事务管理器(MyBatis用的DataSourceTransactionManager)  -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
@@ -79,7 +80,7 @@
     </aop:config>
 
     <!-- 6. 配置包扫描-->
-    <context:component-scan base-package="cn.itcast"></context:component-scan>
+    <context:component-scan base-package="cn.itcast"/>
 
     <!--组装其它 配置文件-->
 </beans>

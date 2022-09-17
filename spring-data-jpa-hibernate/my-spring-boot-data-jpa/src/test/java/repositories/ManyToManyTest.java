@@ -43,6 +43,5 @@ class ManyToManyTest {
         user.getAuthorities().add(authority);
 
         userRepository.save(user);
-        authorityRepository.save(authority);
     }
 }

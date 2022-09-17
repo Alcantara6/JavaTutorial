@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * @author yanjing
  * @date 2022/3/1
- * https://www.yuque.com/office/yuque/0/2022/docx/436938/1647658728593-750926eb-cc38-4788-872a-63c72a36fdc0.docx?from=https%3A%2F%2Fwww.yuque.com%2Fjinggor%2Famvt15%2Ffdc633
+ * <a href="https://www.yuque.com/office/yuque/0/2022/docx/436938/1647658728593-750926eb-cc38-4788-872a-63c72a36fdc0.docx?from=https%3A%2F%2Fwww.yuque.com%2Fjinggor%2Famvt15%2Ffdc633">https://www.yuque.com/office/yuque/0/2022/docx/436938/1647658728593-750926eb-cc38-4788-872a-63c72a36fdc0.docx?from=https%3A%2F%2Fwww.yuque.com%2Fjinggor%2Famvt15%2Ffdc633</a>
  */
 public interface CustomerDao extends JpaRepository<Customer, Long>, JpaSpecificationExecutor<Customer> {
 
@@ -27,4 +27,8 @@ public interface CustomerDao extends JpaRepository<Customer, Long>, JpaSpecifica
 
     @EntityGraph(value = "customer-entity-graph", type = EntityGraph.EntityGraphType.LOAD)
     Customer findByCustName(String name);
+
+    @Query("from Customer where 1 = 1")
+    @EntityGraph(value = "customer-entity-graph", type = EntityGraph.EntityGraphType.LOAD)
+    List<Customer> findAllWithEntityGraphTypeLoad();
 }
