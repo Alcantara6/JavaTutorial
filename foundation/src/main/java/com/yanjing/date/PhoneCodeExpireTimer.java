@@ -44,7 +44,7 @@ public class PhoneCodeExpireTimer {
 
     public int countExpireTime() {
 
-        return (int) Duration.between(LocalDateTime.now(clock), maxLocalDateTime()).toSeconds();
+        return (int) Duration.between(LocalDateTime.now(clock), maxLocalDateTime()).getSeconds();
     }
 
     private LocalDateTime maxLocalDateTime() {
