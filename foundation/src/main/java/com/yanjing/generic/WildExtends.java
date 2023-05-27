@@ -22,7 +22,7 @@ public class WildExtends {
         List<Dog> dogs = new ArrayList<>();
         dogs.add(dog1);
         dogs.add(dog2);
-        takeAnimals(dogs);
+        // takeAnimals(dogs);
         // 数组，运行期错误
         Dog[] dogArrs = {dog1, dog2};
         takeAnimalsArr(dogArrs);

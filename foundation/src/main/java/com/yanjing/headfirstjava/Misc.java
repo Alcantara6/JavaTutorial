@@ -8,7 +8,11 @@ public class Misc {
 
     public static void main(String[] args) {
 
-
+        Misc misc = new Misc();
+        misc.javaType();
+        misc.modifierFinal();
+        misc.nullPoint();
+        System.out.println("exec main");
     }
 
     void javaType() {
