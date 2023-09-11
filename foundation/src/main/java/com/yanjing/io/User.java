@@ -10,6 +10,15 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = -3340693206126193734L;
 
+    public User() {
+    }
+
+    public User(int id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
     private int id;
 
     private String name;
@@ -38,5 +47,10 @@ public class User implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + name + "," + age;
     }
 }

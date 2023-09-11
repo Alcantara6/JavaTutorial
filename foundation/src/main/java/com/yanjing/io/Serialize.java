@@ -22,10 +22,11 @@ public class Serialize {
         user.setAge(12);
 
         try {
-            ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File("./stream.txt")));
-            stream.writeObject(user);
+            FileOutputStream fileOutputStream = new FileOutputStream("./stream.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(user);
             System.out.println("序列化成功");
-            stream.close();
+            objectOutputStream.close();
         } catch (IOException e) {
 
             e.printStackTrace();
@@ -36,11 +37,13 @@ public class Serialize {
 
         try {
 
-            ObjectInputStream stream = new ObjectInputStream(new FileInputStream("./stream.txt"));
+            FileInputStream fileInputStream = new FileInputStream("./stream.txt");
+            ObjectInputStream stream = new ObjectInputStream(fileInputStream);
             try {
                User user = (User) stream.readObject();
                System.out.println("反序列化成功");
                System.out.println(user);
+               stream.close(); // FileInputStream会自动跟着关掉
             } catch (ClassNotFoundException e) {
 
                 e.printStackTrace();
