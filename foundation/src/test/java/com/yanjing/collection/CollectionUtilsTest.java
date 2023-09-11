@@ -98,4 +98,23 @@ public class CollectionUtilsTest {
         CollectionUtils.filter(arrayList4, s -> s.equals("b"));
         System.out.println(arrayList4);
     }
+
+    @Test
+    void addAndSetTest() {
+        List<Integer> group1 = new ArrayList<>();
+        group1.add(1);
+        group1.add(null);
+        group1.add(2);
+        List<Integer> group2 = new ArrayList<>();
+        group2.add(1);
+        group2.add(null);
+        group2.add(2);
+
+        group1.add(1, 100);
+        group1.add(2, 200);
+        group2.set(1, 100);
+        group2.set(2, 200);
+        System.out.println(group1);
+        System.out.println(group2);
+    }
 }

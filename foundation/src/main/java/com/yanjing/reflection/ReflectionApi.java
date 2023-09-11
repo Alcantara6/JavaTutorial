@@ -1,6 +1,7 @@
 package com.yanjing.reflection;
 
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.ReflectionUtils;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -25,11 +26,9 @@ public class ReflectionApi {
         ReflectionApi api = new ReflectionApi();
         Pojo newPojo = api.combinePojos(pojos);
         System.out.println("newPojo is:" + newPojo);
-        System.out.println(pojos.get(0));
-        System.out.println(pojos.get(1));
     }
 
-    public Pojo combinePojos(List<Pojo> pojoList) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
+    public Pojo combinePojos(List<Pojo> pojoList) {
         if (ObjectUtils.isEmpty(pojoList)) {
             return null;
         }
@@ -40,39 +39,44 @@ public class ReflectionApi {
             if (java.lang.reflect.Modifier.isFinal(field.getModifiers())) {
                 continue;
             }
-            // field.setAccessible(true);
-            List<Object> values = pojoList.stream().map(o -> {
-                try {
-                    return invokeGetter(o, field.getName());
-                } catch (IntrospectionException | InvocationTargetException | IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            }).collect(Collectors.toList());
+//            field.setAccessible(true);
+            ReflectionUtils.makeAccessible(field);
+            List<Object> values = pojoList.stream().map(o -> ReflectionUtils.getField(field, o)).collect(Collectors.toList());
+//            List<Object> values = pojoList.stream().map(o -> invokeGetter(o, field.getName())).collect(Collectors.toList());
             for (int i = 0; i < values.size(); i++) {
                 // if value is null, we will change it to N
                 if (ObjectUtils.isEmpty(values.get(i))) {
                     values.set(i, "N");
                 }
             }
+            System.out.println("======== print values =======");
+            System.out.println(values);
+            System.out.println("======= print values hashCodes");
+            System.out.println(values.stream().map(Object::hashCode).collect(Collectors.toList()));
             Object maxValue = values.stream().max(Comparator.comparingInt(Object::hashCode)).orElse(null);
-            // ReflectionUtils.setField(field, newPojo, maxValue);
-            invokeSetter(newPojo, field.getName(), maxValue);
+             ReflectionUtils.setField(field, newPojo, maxValue);
+//            invokeSetter(newPojo, field.getName(), maxValue);
         }
         return newPojo;
     }
 
-    public void invokeSetter(Object obj, String propertyName, Object variableValue) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
-        PropertyDescriptor pd;
-        pd = new PropertyDescriptor(propertyName, obj.getClass());
-        Method setter = pd.getWriteMethod();
-        setter.invoke(obj, variableValue);
+    public static Object invokeGetter(Object obj, String variableName) {
+        try {
+            PropertyDescriptor pd = new PropertyDescriptor(variableName, obj.getClass());
+            Method getter = pd.getReadMethod();
+            return getter.invoke(obj);
+        } catch (Exception e) {
+            throw new RuntimeException("invoke target bean getter method failed", e);
+        }
     }
 
-    public Object invokeGetter(Object obj, String variableName) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
-        PropertyDescriptor pd = new PropertyDescriptor(variableName, obj.getClass());
-        Method getter = pd.getReadMethod();
-        System.out.println(getter.getName());
-        Object f = getter.invoke(obj);
-        return f;
+    public static void invokeSetter(Object obj, String propertyName, Object variableValue) {
+        try {
+            PropertyDescriptor pd = new PropertyDescriptor(propertyName, obj.getClass());
+            Method setter = pd.getWriteMethod();
+            setter.invoke(obj, variableValue);
+        } catch (Exception e) {
+            throw new RuntimeException("invoke target bean setter method failed", e);
+        }
     }
 }
